@@ -1,0 +1,95 @@
+<?php require_once('Template/header.phtml') ?>
+
+<title>Login page</title>
+
+<body>
+
+    <div id="login-title">
+        <h1>Login here</h1>
+    </div>
+
+
+    <!--
+    you can substitue the span of reauth email for a input with the email and
+    include the remember me checkbox
+    -->
+    <div class="container">
+        <div class="card card-container">
+            <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
+            <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+            <p id="profile-name" class="profile-name-card"></p>
+            <form class="form-signin" action="<?php $_SERVER['PHP_SELF']?>" method="post">
+                <span id="reauth-email" class="reauth-email"></span>
+                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="uname"
+                    required autofocus>
+                <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="upassword"
+                    required>
+                <div id="remember" class="checkbox">
+
+
+                    <!-- Captcha Here -->
+                    <?php
+                    if ($flag==5) {
+  
+                        echo ' <div style="text-align:center;">
+                      <div style="display:block;margin-bottom:20px;margin-top:20px;">
+                        <img src="Images/captcha/image'.$timeCount.'.png" id="captchaImage" style="
+                        width: 250px;">
+                      </div>
+                    <form action="'.$_SERVER['PHP_SELF'].'" method="post">
+                    <input type="text" name="input" required/>
+                    <input type="hidden" name="flag" value="1"/>
+                    </form>';
+                    
+                    
+                    
+                        
+                    } 
+                    elseif ($flag==1) {
+                        if($captcha->authUser($input))
+                        {
+                            if(isset($_SESSION["captcha_string"])){
+                                unset($_SESSION["captcha_string"]);
+                            }
+                            echo ' <div style="text-align:center;">
+                            <h1>Your answer is correct!</h1>
+                            <form action="'.$_SERVER['PHP_SELF'].'" method="post"> 
+                                <input type="submit" value="refresh the page">
+                            </form>
+                        </div>';
+                        }
+                    
+                        else {
+                            if(isset($_SESSION["captcha_string"])){
+                                unset($_SESSION["captcha_string"]);
+                            }
+                            echo '<div style="text-align:center;">
+                                <h1>Your answer is incorrect!<br>please try again</h1>
+                            </div>';
+                         
+                        echo ' <div style="text-align:center;">
+                      <div style="display:block;margin-bottom:20px;margin-top:20px;">
+                        <img src="Image/captcha/image'.$timeCount.'.png">
+                      </div>
+                    <form action="'.$_SERVER['PHP_SELF'].'" method="post">
+                    <input type="text" name="input" required/>
+                    <input type="hidden" name="flag" value="1"/>
+                    </form>';
+                    
+                
+                        }
+                    }
+                ?>
+
+
+                    <label>
+                        <input type="checkbox" value="remember-me"> Remember me
+                    </label>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" name="submit_login">Sign in</button>
+            </form><!-- /form -->
+        </div><!-- /card-container -->
+    </div><!-- /container -->
+
+
+    <?php require_once('Template/footer.phtml') ?>

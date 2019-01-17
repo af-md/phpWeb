@@ -1,0 +1,22 @@
+<?php require_once 'Template/header.phtml' ?>
+<body>
+    
+<div> 
+    <h1 class="add-campsite">ADD YOUR CAMPSITE HERE</h1>
+</div>
+    <div class="container">
+        <div class="card card-container">
+            <form class="form-addcamps" action= "<?php $_SERVER['PHP_SELF']?>" method= 'post' enctype="multipart/form-data">
+                <input type="text" id="inputCampsiteName" class="form-control" placeholder="Campsite Name" name="campsiteName" required autofocus><br>  
+                <input type="text" id="inputStreet"  class="form-control" placeholder="Street Address" name="streetAddress" required><br>  
+                <input type="text" id="inputPostcode" class="form-control" placeholder="Post Code" name="postcode" required><br>  
+                <input type="text" id="inputCity" class="form-control" placeholder="City" name="city" required><br>  
+                <input type="text" id="inputCountry" class="form-control" placeholder="Country" name="country" required><br>  
+                <input type="file" name="myFile"><br>  
+            </div>
+                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" name="add_campsite">ADD CAMPSITE</button>
+            </form>
+        </div>
+    </div>
+
+    <?php require_once 'Template/footer.phtml' ?>

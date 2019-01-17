@@ -1,0 +1,438 @@
+
+
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
+
+body{
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+/* Nav bar style */
+
+.container-fluid{
+  background-color: lightskyblue;
+}
+
+.nav-bar{
+  padding-right: 10px;
+}
+
+.nav-item {
+  padding-right: 20px;
+}
+
+.paragraphContainer p{
+
+  padding-left: 500px;
+}
+
+/* Cards style */
+
+.card{
+
+  
+}
+
+/* Icons font awesome style */
+
+.fab 
+{
+  font-size: 30px;
+}
+.fas
+{
+  font-size: 30px;
+}
+
+.far 
+{
+  font-size: 30px;
+}
+
+/* Search Bar filters style */
+
+.container-filterbar{
+  float: left;
+}
+
+.search-button{
+  margin-left: 400px;
+  margin-top: 50px;
+}
+
+.filter-button {
+  margin-top: 40px; 
+  width: 116px;
+  height: 35px;
+}
+
+.filter-button button {
+  width: 116px;
+  height: 35px;;
+}
+
+.card-search .card{
+width: 300px;
+}
+
+.container-rating{
+  margin-left: 15px; 
+}
+
+#campsite-image {
+   width: 200px !important;   
+
+}
+#campsite-card{
+height: 450px;
+width: 300px; 
+}
+
+#card-button{
+  width: 70px;
+  height: 30px;  
+}
+
+#address-card{
+  
+}
+/* Form group selector style */
+
+.form-control[multiple]
+{
+  width: 120px; 
+}
+
+/* Ratings filter on the search page style */
+
+.rating {
+  overflow: hidden;
+  display: inline-block;
+}
+
+.rating-input {
+  float: right;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  margin: 0 0 0 -16px;
+  opacity: 0;
+}
+
+.rating-star,
+.rating:hover .rating-star {
+  position: relative;
+  float: right;
+  display: block;
+  width: 16px;
+  height: 16px;
+  background: url('../Images/Samples/star.png') 0 -16px;
+}
+
+.rating:hover .rating-star:hover,
+.rating:hover .rating-star:hover ~ .rating-star,
+.rating-input:checked ~ .rating-star  {
+  background-position: 0 0;
+}
+
+
+/* Ratings of the product */
+
+
+.rating {
+  overflow: hidden;
+  display: inline-block;
+}
+
+.rating-input {
+  float: right;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  margin: 0 0 0 -16px;
+  opacity: 0;
+}
+
+.rating-star,
+.rating:hover .rating-star {
+  position: relative;
+  float: right;
+  display: block;
+  width: 16px;
+  height: 16px;
+  background: url('../Images/Samples/star.png') 0 -16px;
+}
+
+.rating:hover .rating-star:hover,
+.rating:hover .rating-star:hover ~ .rating-star,
+.rating-input:checked ~ .rating-star  {
+  background-position: 0 0;
+}
+
+
+/*--- Login System --*/
+
+/*
+ * Specific styles of signin component 
+ */
+
+ #login-title{padding-left: 600px;}
+
+ .card-container.card {
+  max-width: 350px;
+  padding: 40px 40px;
+}
+
+.btn {
+  font-weight: 700;
+  height: 36px;
+  cursor: default;
+}
+
+
+/*
+* Card component
+*/
+
+.card {
+  background-color: #F7F7F7;
+  /* just in case there no content*/
+  padding: 20px 25px 30px;
+  margin: 0 auto 25px;
+  margin-top: 50px;
+  border-radius: 2px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.profile-img-card {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 10px;
+  display: block;
+  border-radius: 50%;
+}
+
+/*
+* Form styles
+*/
+
+.profile-name-card {
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  margin: 10px 0 0;
+  min-height: 1em;
+}
+
+.reauth-email {
+  display: block;
+  color: #404040;
+  line-height: 2;
+  margin-bottom: 10px;
+  font-size: 14px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.form-signin #inputFirstName,
+.form-signin #inputLastName,
+.form-signin #inputEmail,
+.form-signin #inputPassword {
+  direction: ltr;
+  height: 44px;
+  font-size: 16px;
+}
+
+.form-signin input[type=email],
+.form-signin input[type=password],
+.form-signin input[type=text],
+.form-signin button {
+  width: 100%;
+  display: block;
+  margin-bottom: 10px;
+  z-index: 1;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.form-signin .form-control:focus {
+  border-color: rgb(104, 145, 162);
+  outline: 0;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
+}
+
+.btn.btn-signin {
+  /*background-color: #4d90fe; */
+  background-color: rgb(104, 145, 162);
+  /* background-color: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
+  padding: 0;
+  font-weight: 700;
+  font-size: 14px;
+  height: 36px;
+  border-radius: 3px;
+  border: none;
+  transition: all 0.218s;
+}
+
+.btn.btn-signin:hover,
+.btn.btn-signin:active,
+.btn.btn-signin:focus {
+  background-color: rgb(12, 97, 33);
+}
+
+.material-icons{
+  padding-left: 30px;
+}
+
+/*-- Positioning the search button style --*/
+
+.carousel-caption{
+
+  bottom: 450px;
+  height: 120px;
+}
+
+.carousel-caption #textarea-carosel
+{
+  width: 304px;
+  height: 40px;
+}
+
+.carousel-caption #search-bar-carousel{
+
+  width: 86px;
+  height: 40px; 
+}
+
+
+/* Admin page style */
+
+.userName{
+	padding-top: 10px;
+}
+
+img.circleImg{
+	border-radius: 50%;
+	width: 75px;
+}
+
+.sidebarLeft{
+	background-color: #1768d3;
+	width: 240px;
+	height: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+#Admin-ref{
+color: black ;
+}
+
+.user{
+	color: #fff;
+	padding: 98px 60px 1px;
+}
+
+.container-admincard{
+padding-left: 25    0px; 
+}
+.card-search .card{
+  width: 300px;
+  }
+  
+  #admin-card-image {
+     width: 150px !important;   
+  
+  }
+  #campsite-card{
+  height: 450px;
+  width: 300px; 
+  }
+  
+  #card-button{
+    width: 70px;
+    height: 30px;  
+  }
+
+  
+/* The user profile style */
+
+.user_profile{
+	color: #fff;
+	padding: 98px 60px 1px;
+}
+
+.userName_profile{
+	padding-top: 10px;
+}
+
+#user_section{
+  align-content: center;
+  padding-left: 350px;
+}
+
+.table-user{
+  border: solid;
+  width: 306px;
+  height: 106px;
+}
+
+/* Add the campsite style */
+
+.btn:not(:disabled):not(.disabled){
+  height: 70px;
+}
+
+  dd-campsite{
+  text-align: center; 
+}
+
+
+/*---Media Queries --*/
+
+@media (max-width: 992px) {
+
+}
+@media (max-width: 768px) {
+
+}
+@media (max-width: 576px) {
+.search-button{
+  margin-left: 0px;
+  margin-top: 0px;
+}
+}
+
+
+/*
+
+Small (sm) devices (landscape phones, 576px and up)
+@media (min-width: 576px) { ... }
+
+Medium (md) devices (tablets, 768px and up)
+@media (min-width: 768px) { ... }
+
+Large (lg) devices (desktops, 992px and up)
+@media (min-width: 992px) { ... }
+
+Extra (xl) large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { ... }
+*/
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,33 @@
+<?php require_once('Template/header.phtml') ?>
+<body>
+
+<h2 style="inline-text: center;">My Favorite table</h2>
+
+
+<div class="container-productcard">
+<div class="card-search">
+       <div class="row">
+       <?php  foreach ($view->campsites as $campsite) {
+    echo '
+  
+              <div class="col-sm-3 col-md-3 col-lg-3">
+                     <div class="card" id="campsite-card">     
+                                   <div class="text-center">
+                            <div class="card-body">
+          
+                                   <h5 class="card-title">. $campsite->getCampsiteName() .</h5>
+                                   <img class="card-img-top" src="Images/Default.jpg" alt="Card image cap" id="campsite-image">                                                
+                                   <p class="card-text" id="address-card">card address here</p><br>   
+                                   <p class="card-text" id="address-card">card address here</p><br>       
+                            </div>
+                            <a href="#" class="btn btn-primary" id="card-button">Check</a>
+                            <a href="#" class="btn btn-primary" id="card-button">add</a>    
+                            </div>
+                            </div>
+                            
+                     </div>
+               </div>'; }  ?>
+
+</div>
+</div>  
+<?php require_once 'Template/footer.phtml'?>

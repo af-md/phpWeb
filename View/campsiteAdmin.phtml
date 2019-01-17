@@ -1,0 +1,76 @@
+<?php require_once 'Template/header.phtml'; ?>
+
+<body>
+
+<section>
+        <div class="sidebarLeft">
+            <div class="user">
+                <img class="circleImg" src="Images/avatar.png" alt="Avatar">
+                <p class="userName"> Hello <?php echo'.$_SESSION["userUid"].'; ?> </p>
+            </div>
+
+            <hr>
+            <nav class="navbar-fixed-left">
+                    <ul>
+                        <li class="leftNav"><a href="productsAdmin.php" id="Admin-ref"><i class="fas fa-home"></i>Campsites</a></li><br><br>
+                        <li class="leftNav"><a href="usersAdmin.php" id="Admin-ref"><i class="fas fa-user"></i> Users</a></li>
+                    </ul>
+            </nav>
+        </div>
+    </section>
+    <div class="container">
+
+        <div class="admin-search">
+            <input type="text" placeholder="search">
+            <button class="" type="submit" name="admin-search">Search</button>
+        </div>
+        <div class="container-admincard">
+        <div class="card-admin">
+        <div class="row">
+
+            <?php  foreach ($view->campsites as $campsite) {
+    echo '
+                              <div class="col-sm-6 col-md-6 col-lg-6">
+                                     <div class="card" id="admin-card">     
+                                                   <div class="text-center">
+                                            <div class="card-body">
+                          
+                                                   <h5 class="card-title">'.$campsite->getCampsite().'Campsite Name</h5>
+                                                   <img class="card-img-top" src="Images/Default.jpg" alt="Card image cap" id="admin-card-image">                                                
+                                                   <p class="card-text" id="address-card">card address here</p><br>        
+                                            </div>
+                                            <a href="#" class="btn btn-primary" id="card-button">Delete</a>   
+                                            </div>
+                                            </div> 
+                              </div>
+                       </div>
+                </div>
+         </div> '; 
+                        }?>a
+
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+
+                    <?php
+//insert some logic checks if the campsite do exists or not.
+
+$countNumber = 1; 
+
+for ($i=0; $i < $nOfPages; $i++) { 
+
+    echo '<li class="page-item"><a class="page-link" href="campsite.php?page='.$i.'">'.$countNumber.'</a></li>';
+
+    $countNumber++;
+}
+
+?>
+                </ul>
+            </nav>
+
+        </div>
+    </div>
+
+    <?php require_once 'Template/footer.phtml';?>
+<!-- <li class="page-item"><a class="page-link" href="#">2</a></li> -->
+<!-- <li class="page-item"><a class="page-link" href="#">3</a></li>
+<li class="page-item"><a class="page-link" href="#">Previous</a></li> -->

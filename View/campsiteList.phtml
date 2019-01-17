@@ -1,0 +1,218 @@
+<?php require_once 'Template/header.phtml'; ?>
+<?php 
+$checkPagination = true; 
+
+// Doing this logic here, gives us more flexibility on what we can do. 
+if($pageNumber > 1)
+{
+       $directNext = $pageNumber + 1;
+       $directPrevius = $pageNumber - 1; 
+}
+
+else {
+       $directPage= $pageNumber + 1;
+       $checkPagination = false; 
+}
+?>
+
+<div class="container">
+       <form class="form-filters" action="<?php $_SERVER['PHP_SELF']?>" method="post">
+              <div class="search-button">
+                     <div class="row">
+                            <div class="col-md-6">
+                                   <input type="text" name="search-keyword" placeholder="Search from Keywords">
+                                   <button class="search-button-keyword" type="submit">Search</button><br><br>
+                            </div>
+                     </div>
+              </div>
+              <div class="container-filterbar">
+                     <div class="row">
+                            <div class="col-md-6">
+                                   <div class="form-group">
+                                          <label for="exampleFormControlSelect2">
+                                                 <div class="alert alert-primary" role="alert">
+                                                        Search From Filters
+                                                 </div>
+                                          </label><br><br>
+                                          <label for="form-control">
+                                                 <p>Filter from country </p>
+                                          </label>
+                                          <select multiple class="form-control" id="exampleFormControlSelect2">
+                                                 <option>Albania</option name="dd">
+                                                 <option>Austria</option>
+                                                 <option>Bulgaria</option>
+                                                 <option>Croatia</option>
+                                                 <option>Cyprus</option>
+                                                 <option>Czechia</option>
+                                                 <option>Denmark</option>
+                                                 <option>Estonia</option>
+                                                 <option>Finland</option>
+                                                 <option>France</option>
+                                                 <option>Germany</option>
+                                                 <option>Greece</option>
+                                                 <option>Hungary</option>
+                                                 <option>Ireland</option>
+                                                 <option>Italy</option>
+                                                 <option>Latvia</option>
+                                                 <option>Lithuania</option>
+                                                 <option>Luxembourg</option>
+                                                 <option>Malta</option>
+                                                 <option>Netherlands</option>
+                                                 <option>Poland</option>
+                                                 <option>Portugal</option>
+                                                 <option>Romania</option>
+                                                 <option>Slovakia</option>
+                                                 <option>Slovenia</option>
+                                                 <option>Spain</option>
+                                                 <option>Sweden</option>
+                                                 <option>United Kingdom</option>
+                                          </select>
+                                   </div><br>
+                                   <div class="container-rating">
+                                          <label for="rating">
+                                                 <p>Filter from ratings</p>
+                                          </label>
+                                          <div class="row">
+                                                 <span class="rating">
+                                                        <input type="radio" class="rating-input" id="rating-input-1-5-5"
+                                                               name="rating-input-5">
+                                                        <label for="rating-input-1-5-5" class="rating-star"></label>
+                                                        <input type="radio" class="rating-input" id="rating-input-1-4-5"
+                                                               name="rating-input-5">
+                                                        <label for="rating-input-1-4-5" class="rating-star"></label>
+                                                        <input type="radio" class="rating-input" id="rating-input-1-3-5"
+                                                               name="rating-input-5">
+                                                        <label for="rating-input-1-3-5" class="rating-star"></label>
+                                                        <input type="radio" class="rating-input" id="rating-input-1-2-5"
+                                                               name="rating-input-5">
+                                                        <label for="rating-input-1-2-5" class="rating-star"></label>
+                                                        <input type="radio" class="rating-input" id="rating-input-1-1-5"
+                                                               name="rating-input-5">
+                                                        <label for="rating-input-1-1-5" class="rating-star"></label>
+                                                 </span>
+                                          </div>
+                                   </div><br>
+                                   <div class="container-facility">
+                                          <label for="">
+                                                 <p>Filter from facility</p>
+                                          </label>
+                                          <div class="row">
+                                                 <div class="col-sm-8 col-md-6 col-lg-4">
+                                                        <div>
+                                                               <table>
+                                                                      <tr>
+                                                                             <th colspan="2">Facility</th>
+                                                                      </tr>
+                                                                      <tr>
+                                                                             <td><i class="fas fa-shower"></i></td>
+                                                                             <td>shower</td>
+                                                                             <td><input type="checkbox" name="shower"
+                                                                                           id=""></td>
+                                                                      </tr>
+                                                                      <tr>
+                                                                             <td><i class="fas fa-wifi"></i></td>
+                                                                             <td>wifi</td>
+                                                                             <td><input type="checkbox" name="wifi" id=""></td>
+                                                                      </tr>
+                                                                      <tr>
+                                                                             <td><i class="fas fa-coffee"></i></td>
+                                                                             <td>Coffee</td>
+                                                                             <td><input type="checkbox" name="" id=""></td>
+                                                                      </tr>
+                                                                      <tr>
+                                                                             <td><i class="fab fa-accessible-icon"></i></td>
+                                                                             <td>Accessible</td>
+                                                                             <td><input type="checkbox" name="" id=""></td>
+                                                                      </tr>
+                                                                      <tr>
+                                                                             <td> <i class="fas fa-tint"></i></td>
+                                                                             <td>Water</td>
+                                                                             <td><input type="checkbox" name="" id=""></td>
+                                                                      </tr>
+                                                                      <tr>
+                                                                             <td><i class="far fa-smile"></i></td>
+                                                                             <td>Family</td>
+                                                                             <td><input type="checkbox" name="" id=""></td>
+                                                                      </tr>
+                                                               </table>
+                                                        </div>
+                                                 </div>
+                                          </div>
+                                   </div>
+                                   <div class="filter-button">
+                                          <button id="filter-button">apply filter</button>
+                                   </div>
+       </form>
+</div>
+</div>
+</div>
+
+
+<div class="container">
+       <div class="card-search">       
+              <div class="row">
+             
+
+                     <?php  foreach ($view->campsites as $campsite) {
+    echo '
+  
+     <div class="col-sm-3 col-md-3 col-lg-3">
+     <div class="card" id="campsite-card">     
+                   <div class="text-center">
+            <div class="card-body">
+                   <h5 class="card-title">' . $campsite->getCampsiteName() .  '</h5>
+                   <img class="card-img-top" src=" src="Images/'.$campsite->getPhoto().'"" alt="Card image cap" id="campsite-image">                                                
+                   <p class="card-text" id="address-card">card address here</p><br>   
+                   <p class="card-text" id="address-card">'.$campsite->getCampsiteID().'</p><br>       
+            </div>
+            <input type="hidden" name="campsiteID" value="'.$campsite->getCampsiteID().'">
+            <a href="campsiteList.php?favouriteCampsiteID=campsiteID&page='.$pageNumber.'" class="btn btn-primary" id="card-button">add to favourite</a>
+            <a href="#" class="btn btn-primary" id="card-button">add</a>    
+            </div>
+            </div>
+            </div>
+            
+</div>
+</div>'; 
+ // With the ? pass the ID of the campsite and pass teh current page numeber to reload the page on the Page that the user was priewing.                      
+   }?> 
+
+              </div>
+       </div>
+
+       <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-center">
+
+                     <?php
+
+// Check if the boolean value is true then do something. 
+if($checkPagination)
+{
+    
+    
+    
+    echo '<li class="page-item"><a class="page-link" href="campsiteList.php?page='. $directPrevius .'">Previous</a></li>'; 
+    echo '<li class="page-item"><a class="page-link" href="campsiteList.php?page='. $directNext .'">Next</a></li>';
+}
+
+else 
+{
+
+    echo '<li class="page-item"><a class="page-link" href="campsiteList.php?page='.$directPage.'">Next</a></li>';
+}
+
+// for ($i=1; $i < $nOfPages; $i++)
+//  { 
+
+//     echo '<li class="page-item"><a class="page-link" href="campsiteList.php?page='.$i.'"></a></li>';
+// }
+
+       
+?>     
+              </ul>
+       </nav>
+
+
+       <?php require_once 'Template/footer.phtml';?>
+
+     
