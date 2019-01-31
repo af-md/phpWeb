@@ -4,6 +4,7 @@ require_once 'Model/CampsiteDataSet.php';
 
 require_once 'Model/UserDataSet.php';
 
+
 session_start();
 
 $view = new stdClass;
@@ -15,17 +16,23 @@ $campsiteData = new CampsiteDataSet;
 $userData = new UserDataSet;
 
 
-$favouritedCampsite = $_GET['favouriteCampsiteID'];
+//$favouritedCampsite = $_GET['favouriteCampsiteID'];
 
-if ($userData->isUserLogged())
-{
-    $userIDfav = $_SESSION['id'];
-}
 
-else 
-{
-    echo 'You need to login first'; 
-}
+$userID = $_SESSION['id'];
+
+
+
+//var_dump($userID);
+//die();
+
+// Get the facourite ID 
+
+$view->campsitesFav = $campsiteData->getFavourite($userID);
+
+//var_dump($view->campsitesFav);
+
+//die();
 
 require_once 'View/favourite.phtml';
 

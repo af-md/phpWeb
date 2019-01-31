@@ -10,5 +10,7 @@ $userData = new UserDataSet;
 
 // use the user class fod admin; 
 
+require_once "View/campsiteAdmin.phtml";
+
 
 
