@@ -167,8 +167,8 @@ class UserDataSet
     /**
      * This function retrives the favourite campsites id's from the the database, and stores them in to an array. 
      *
-     * @param [type] $campsiteID
-     * @return void
+     * @param $userID
+     * @return associative array
      */
     public function getFavouriteForSession($userID)
     {
@@ -183,11 +183,11 @@ class UserDataSet
 
         $dataset = []; 
 
-        while($row = $statement->fetch())
+        while($row = $statement->fetchAll()) // the sql statement fetches all the arrays, and then it returns them  as an array. 
         {
             $dataset = $row; 
         }
-
         
+        return $dataset; 
     }
 }

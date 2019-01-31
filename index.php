@@ -17,7 +17,8 @@ $view->campsites = $campsite->fetchSomeCampsites(1, 6);
 
 $chekc  = $_SESSION['favourite'];
 
-var_dump($chekc);
-die(); 
+// var_dump($chekc);
+
+// die(); 
 
 require_once 'View/index.phtml';

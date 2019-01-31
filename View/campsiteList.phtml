@@ -212,7 +212,8 @@ endif;
                             <form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET">
                             <input type="hidden" name="favouriteCampsiteID" value=<?php echo$campsite->getCampsiteID(); ?>>
                             <input type="hidden" name="pagination" value=<?php echo $pageNumber ; ?>>
-                            <?php if(): ?>
+                            <?php  $ID = $campsite->getCampsiteID(); 
+                            if($campsiteData->checkCampIdInFavSes($ID)): ?>
                             <input type="submit" name="add to favourite" value="Favourite">                           
                         </form>
                     </div>

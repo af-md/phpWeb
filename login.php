@@ -30,13 +30,16 @@ if (isset($_POST['submit_login'])) {
     $flag =  $_POST['flag'];
     
         if ($userData->verifyUser($userName, $userPassword)) {
+            
             $user =  $userData->fetchSomeUser($userName);
 
             $userID = $user->getUserID();
 
             $_SESSION['id'] = $userID;
 
-            $_SESSION['favourite'] = $userData->getFavouriteForSession($userID); 
+            $userFavTableID = $userData->getFavouriteForSession($userID); 
+
+            $_SESSION['favourite'] = $userFavTableID;
 
             header("Location: index.php");
         }
