@@ -13,7 +13,7 @@ Class Campsite {
         $this->_country = $dbRow['country'];
         $this->_latitude = $dbRow['latitude'];
         $this->_longitude = $dbRow['longitude'];
-        $this->_photo = $dbRow['photo'];    
+      //  $this->_photo = $dbRow['photo'];    
     
     }
 

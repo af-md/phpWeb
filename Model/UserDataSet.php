@@ -126,4 +126,68 @@ class UserDataSet
     {
         session_destroy();
     }
+
+    /**
+     * Get all the users in the database 
+     */
+    public function getAllUserSignedUp()
+    {
+        $query = "SELECT * FROM User";
+      
+        $statement = $this->_dbHandle->prepare($query);
+
+        $statement->bindParam(1, $userName); // Bind paramers for safety reasons
+
+        $statement->execute();
+
+        $dataSet = [];
+
+        while($row = $statement->fetch())
+        {
+            $dataSet = new User($row); 
+        }
+        return $dataSet;
+    }
+
+    /**
+     * Remove user
+     */
+    public function removeUser($userID)
+    {
+        $sql = "DELETE FROM User WHERE userID = ?";
+
+        $statement = $this->_dbHandle->prepare($sql);
+
+        $statement->bindParam(1, $userID); // Bind paramers for safety reasons
+
+        $statement->execute();
+
+    }
+
+    /**
+     * This function retrives the favourite campsites id's from the the database, and stores them in to an array. 
+     *
+     * @param [type] $campsiteID
+     * @return void
+     */
+    public function getFavouriteForSession($userID)
+    {
+        // What if the user hasn't any campsite ? 
+        $sql =  "SELECT campsite_id FROM favourites WHERE user_id = ?";
+     
+        $statement = $this->_dbHandle->prepare($sql);
+
+        $statement->bindParam(1, $userID);
+        
+        $statement->execute();
+
+        $dataset = []; 
+
+        while($row = $statement->fetch())
+        {
+            $dataset = $row; 
+        }
+
+        
+    }
 }

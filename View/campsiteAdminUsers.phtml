@@ -1,0 +1,29 @@
+<body>
+<h2 style= text-align: center;>Admin User Panel Editing</h2>
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">UserName</th>
+      <th scope="col">CampsiteOwned</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  <?php $tableRowCount = 1; 
+   foreach ($view->users as $users) {
+    echo'
+    <tr>
+    <th scope="row">'.$tableRowCount.'</th>
+    <td>'.$users->getName().'</td>
+    <td>Null</td>
+    <td><a href="campsiteAdminUsers.php?id="'.$users->getID().' class="btn btn-light">DELETE</a></td>
+  </tr>';
+
+   $tableRowCount++;
+  
+  }?>
+    
+  </tbody>
+</table>
+</body>

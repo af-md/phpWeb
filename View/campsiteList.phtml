@@ -1,26 +1,34 @@
 <?php require_once 'Template/header.phtml'; ?>
 <?php 
 $checkPagination = true; 
+$checkPaginationForFavouriteLanding = false; 
 
 // Doing this logic here, gives us more flexibility on what we can do. 
-if($pageNumber > 1)
-{
-       $directNext = $pageNumber + 1;
-       $directPrevius = $pageNumber - 1; 
-}
 
-else {
-       $directPage= $pageNumber + 1;
-       $checkPagination = false; 
-}
+if($pagingCheck):
+
+       $checkPaginationForFavouriteLanding = true; 
+       if($pageNumber > 1)
+       {
+              $directNext = $pageNumber + 1;
+              $directPrevius = $pageNumber - 1; 
+       }
+
+       else {
+              $directPage= $pageNumber + 1;
+              $checkPagination = false; 
+       }
+
+endif;
 ?>
 
 <div class="container">
-       <form class="form-filters" action="<?php $_SERVER['PHP_SELF']?>" method="post">
+       <form class="form-filters" method="GET" action="<?php $_SERVER['PHP_SELF']?>">
               <div class="search-button">
                      <div class="row">
                             <div class="col-md-6">
-                                   <input type="text" name="search-keyword" placeholder="Search from Keywords">
+                                   <input type="text" name="search-keyword" placeholder="Search from Campsite Name">
+                                  
                                    <button class="search-button-keyword" type="submit">Search</button><br><br>
                             </div>
                      </div>
@@ -146,33 +154,33 @@ else {
 </div>
 </div>
 </div>
-
-
+       <!-- Seciton for the searched campsite cards display-->
+<?php if($searchCheck): ?>
 <div class="container">
        <div class="card-search">       
               <div class="row">
              
 
-                     <?php  foreach ($view->campsites as $campsite) {
+                     <?php  foreach ($view->searchCampsite as $campsite) {
+    //var_dump($view->campsites);
+    //die(); 
     echo '
-  
-     <div class="col-sm-3 col-md-3 col-lg-3">
-     <div class="card" id="campsite-card">     
-                   <div class="text-center">
+      
+    <div class="col-sm-3 col-md-3 col-lg-3">
+    <div class="card" id="campsite-card">
+        <div class="text-center">
             <div class="card-body">
-                   <h5 class="card-title">' . $campsite->getCampsiteName() .  '</h5>
-                   <img class="card-img-top" src=" src="Images/'.$campsite->getPhoto().'"" alt="Card image cap" id="campsite-image">                                                
-                   <p class="card-text" id="address-card">card address here</p><br>   
-                   <p class="card-text" id="address-card">'.$campsite->getCampsiteID().'</p><br>       
+                <h5 class="card-title">' .$campsite->getCampsiteName().'</h5>
+                <img class="card-img-top" src=" src=" Images/'.$campsite->getPhoto().'"" alt="Card image cap" id="campsite-image">
+                <p class="card-text" id="address-card">card address here</p><br>
+                <p class="card-text" id="address-card">'.$campsite->getCampsiteID().'</p><br>
             </div>
-            <input type="hidden" name="campsiteID" value="'.$campsite->getCampsiteID().'">
-            <a href="campsiteList.php?favouriteCampsiteID=campsiteID&page='.$pageNumber.'" class="btn btn-primary" id="card-button">add to favourite</a>
-            <a href="#" class="btn btn-primary" id="card-button">add</a>    
-            </div>
-            </div>
-            </div>
-            
-</div>
+            <form action="'.$_SERVER['PHP_SELF'].'"method="GET" >
+            <input type="hidden" name="favouriteCampsiteID" value="'.$campsite->getCampsiteID().'">
+            <input type="submit" name="add">
+            </form>
+        </div>
+    </div>
 </div>'; 
  // With the ? pass the ID of the campsite and pass teh current page numeber to reload the page on the Page that the user was priewing.                      
    }?> 
@@ -180,10 +188,51 @@ else {
               </div>
        </div>
 
+       <?php endif ?>
+
+        <!-- END Secton for the searched campsite cards display-->
+
+        <!-- start Secton for the landing campsite cards display-->
+
+        <?php if($landingCheck): ?>
+<div class="container">
+    <div class="card-search">
+        <div class="row">
+            <?php echo' '; ?>
+            <?php  foreach ($view->campsites as $campsite):?>
+            <div class="col-sm-3 col-md-3 col-lg-3">
+                <div class="card" id="campsite-card">
+                    <div class="text-center">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <?php echo $campsite->getCampsiteName();  ?>
+                            </h5>
+                            <img class="card-img-top" src=Images/<?php echo $campsite->getPhoto() ; ?>  alt="Card image cap" id="campsite-image">
+                            <p class="card-text" id="address-card">card address here</p><br>
+                            <form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET">
+                            <input type="hidden" name="favouriteCampsiteID" value=<?php echo$campsite->getCampsiteID(); ?>>
+                            <input type="hidden" name="pagination" value=<?php echo $pageNumber ; ?>>
+                            <?php if(): ?>
+                            <input type="submit" name="add to favourite" value="Favourite">                           
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php endforeach; ?>
+       
+
+       <?php endif ?>
+
+        <!-- END Secton for the landing campsite cards display-->
+        <?php if($pagingCheck): ?>
+
        <nav aria-label="Page navigation example">
               <ul class="pagination justify-content-center">
 
                      <?php
+                     
 
 // Check if the boolean value is true then do something. 
 if($checkPagination)
@@ -211,7 +260,7 @@ else
 ?>     
               </ul>
        </nav>
-
+<?php endif; ?>
 
        <?php require_once 'Template/footer.phtml';?>
 

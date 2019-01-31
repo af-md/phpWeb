@@ -36,6 +36,7 @@ if (isset($_POST['submit_login'])) {
 
             $_SESSION['id'] = $userID;
 
+            $_SESSION['favourite'] = $userData->getFavouriteForSession($userID); 
 
             header("Location: index.php");
         }

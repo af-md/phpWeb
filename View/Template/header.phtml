@@ -54,7 +54,7 @@
                         <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="campsiteList.php?page=1&favouriteCampsiteID=C">Search Campsite</a>
+                        <a class="nav-link" href="campsiteList.php?page=1">Search Campsite</a>
                     </li>
                     <?php 
                 if (!$userData->isUserLogged()) { echo '
@@ -64,6 +64,7 @@
                 <li class="nav-item">
                     <a href="registerform.php">Sign up</a>
                 </li>
+                
 
                 </ul> ';
                 }
@@ -78,6 +79,9 @@
             <li class="nav-item">
                 <a href="addCampsite.php">Add Your Campsite</a>
             </li> 
+            <li>
+                    <a href="campsiteAdmin.php" >Admin Panel</a>
+                </li>
             <li class="nav-item">
             <a href="userProfile.php">My Profile</a>
         </li>   
