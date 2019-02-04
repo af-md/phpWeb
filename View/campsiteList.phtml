@@ -28,7 +28,7 @@ endif;
                      <div class="row">
                             <div class="col-md-6">
                                    <input type="text" name="search-keyword" placeholder="Search from Campsite Name">
-                                  
+
                                    <button class="search-button-keyword" type="submit">Search</button><br><br>
                             </div>
                      </div>
@@ -154,12 +154,12 @@ endif;
 </div>
 </div>
 </div>
-       <!-- Seciton for the searched campsite cards display-->
+<!-- Seciton for the searched campsite cards display-->
 <?php if($searchCheck): ?>
 <div class="container">
-       <div class="card-search">       
+       <div class="card-search">
               <div class="row">
-             
+
 
                      <?php  foreach ($view->searchCampsite as $campsite) {
     //var_dump($view->campsites);
@@ -183,56 +183,71 @@ endif;
     </div>
 </div>'; 
  // With the ? pass the ID of the campsite and pass teh current page numeber to reload the page on the Page that the user was priewing.                      
-   }?> 
+   }?>
 
               </div>
        </div>
 
        <?php endif ?>
 
-        <!-- END Secton for the searched campsite cards display-->
+       <!-- END Secton for the searched campsite cards display-->
 
-        <!-- start Secton for the landing campsite cards display-->
+       <!-- start Secton for the landing campsite cards display-->
 
-        <?php if($landingCheck): ?>
-<div class="container">
-    <div class="card-search">
-        <div class="row">
-            <?php echo' '; ?>
-            <?php  foreach ($view->campsites as $campsite):?>
-            <div class="col-sm-3 col-md-3 col-lg-3">
-                <div class="card" id="campsite-card">
-                    <div class="text-center">
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <?php echo $campsite->getCampsiteName();  ?>
-                            </h5>
-                            <img class="card-img-top" src=Images/<?php echo $campsite->getPhoto() ; ?>  alt="Card image cap" id="campsite-image">
-                            <p class="card-text" id="address-card">card address here</p><br>
-                            <form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET">
-                            <input type="hidden" name="favouriteCampsiteID" value=<?php echo$campsite->getCampsiteID(); ?>>
-                            <input type="hidden" name="pagination" value=<?php echo $pageNumber ; ?>>
-                            <?php  $ID = $campsite->getCampsiteID(); 
+       <?php if($landingCheck): ?>
+       <div class="container">
+              <div class="card-search">
+                     <div class="row">
+                            <?php  foreach ($view->campsites as $campsite):?>
+                            <div class="col-sm-3 col-md-3 col-lg-3">
+                                   <div class="card" id="campsite-card">
+                                          <div class="text-center">
+                                                 <div class="card-body">
+                                                        <h5 class="card-title">
+                                                               <?php echo $campsite->getCampsiteName();  ?>
+                                                        </h5>
+                                                        <img class="card-img-top" src=Images/ <?php echo $campsite->getPhoto()
+                                                        ; ?> alt="Card image cap" id="campsite-image">
+                                                        <p class="card-text" id="address-card">card address here</p><br>
+                                                        <form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET">
+                                                               <?php  $ID = $campsite->getCampsiteID(); 
                             if($campsiteData->checkCampIdInFavSes($ID)): ?>
-                            <input type="submit" name="add to favourite" value="Favourite">                           
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <?php endforeach; ?>
-       
+                                                               <input type="submit" name="DisableFav" value="RemoveFav"
+                                                                      class="btn btn-danger">
+                                                               <input type="hidden" name="favouriteCampsiteID" value=<?php
+                                                                      echo$campsite->getCampsiteID(); ?>>
+                                                               <input type="hidden" name="pagination" value=<?php echo
+                                                                      $pageNumber ; ?>>
+                                                               <input type="hidden" name="FavAction" value="add">
+                                                               <?php else: ?>
+                                                               <input type="submit" name="AddFav" value="AddFav" class="btn btn-success">
+                                                               <input type="hidden" name="favouriteCampsiteID" value=<?php
+                                                                      echo$campsite->getCampsiteID(); ?>>
+                                                               <input type="hidden" name="pagination" value=<?php echo
+                                                                      $pageNumber ; ?>>
+                                                               <input type="hidden" name="FavAction" value="remove">
+                                                        </form>
+                                                 </div>
+                                          </div>
+                                   </div>
 
-       <?php endif ?>
+                            </div>
+                     </div>
 
-        <!-- END Secton for the landing campsite cards display-->
-        <?php if($pagingCheck): ?>
+                     <?php endforeach; ?>
+              </div>
 
-       <nav aria-label="Page navigation example">
-              <ul class="pagination justify-content-center">
+       </div>
+</div>
+<?php endif ?>
 
-                     <?php
+<!-- END Secton for the landing campsite cards display-->
+<?php if($pagingCheck): ?>
+
+<nav aria-label="Page navigation example">
+       <ul class="pagination justify-content-center">
+
+              <?php
                      
 
 // Check if the boolean value is true then do something. 
@@ -258,11 +273,9 @@ else
 // }
 
        
-?>     
-              </ul>
-       </nav>
+?>
+       </ul>
+</nav>
 <?php endif; ?>
 
-       <?php require_once 'Template/footer.phtml';?>
-
-     
+<?php require_once 'Template/footer.phtml';?>

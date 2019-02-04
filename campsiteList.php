@@ -51,6 +51,7 @@ if(isset($_GET['search-keyword']))
 
         $pageNumber = 1; 
     }
+    // I have to add the favourite bit here as well. 
 
 }
 else {
@@ -69,14 +70,23 @@ else {
 
     if (isset($_GET['favouriteCampsiteID'])) /// you could post the fields really. 
     {
-        $favouriteCampsite = $_GET['favouriteCampsiteID']; 
+        $favouriteCampsite = $_GET['favouriteCampsiteID'];
+        if (isset($_GET['FavAction'])){
+            $action = $_GET['action'];
+            if ($action == 'add') {
+                $favouriteCampsite = $_GET['favouriteCampsiteID'];
 
-        $userFavouriting = $_SESSION['id']; // get the user from the session
+                $userFavouriting = $_SESSION['id']; // get the user from the session
 
-        $campsiteData->addToFavourite($favouriteCampsite, $userFavouriting); // add the campsite to the database
-
+                $campsiteData->addToFavourite($favouriteCampsite, $userFavouriting); // add the campsite to the  database
+            }
+            elseif ($action == 'remove') {
+                $campsiteData->removeFromFavourite($favouriteCampsite);
+            }
+            
+            }
         //var_dump($favouriteCampsite);
-        
+        }
     }
 
 }

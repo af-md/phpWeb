@@ -167,6 +167,13 @@ class CampsiteDataSet
         $statement->bindparam(1, $campsiteid);
         $statement->bindparam(2, $userid);
         $statement->execute();
+        
+        $favSessArra == $_SESSION['favourites'];
+        
+        array_push($favSessArra, $campsiteid);
+        
+        var_dump($favSessArra); 
+        
     }
 
     /**
