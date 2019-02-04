@@ -72,7 +72,7 @@ else {
     {
         $favouriteCampsite = $_GET['favouriteCampsiteID'];
         if (isset($_GET['FavAction'])){
-            $action = $_GET['action'];
+            $action = $_GET['FavAction'];
             if ($action == 'add') {
                 $favouriteCampsite = $_GET['favouriteCampsiteID'];
 
@@ -83,11 +83,11 @@ else {
             elseif ($action == 'remove') {
                 $campsiteData->removeFromFavourite($favouriteCampsite);
             }
-            
+
             }
         //var_dump($favouriteCampsite);
         }
-    }
+    
 
 }
 

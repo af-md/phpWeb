@@ -241,12 +241,12 @@ class CampsiteDataSet
     /**
      * Check if the campsite is in the favourite session array or not.  
      */
-    public function checkCampIdInFavSes($camspiteID)
+    public function checkCampIdInFavSes($ID)
     {
         $isAlreadyFav = false; // create boolean value that sets to true if the campsite ID is in the array already. 
-        for ($i=0; $i < count($_SESSION['favourites']); $i++) // get in to the array and compare if the campsite ID is the same as the one passed in the paramater
+        for ($i=0; $i < count($_SESSION['favourite']); $i++) // get in to the array and compare if the campsite ID is the same as the one passed in the paramater
         { 
-          if ($_SESSION['favourites'][$i] == $campsiteID)
+          if ($_SESSION['favourite'][$i] == $ID)
           {
               $isAlreadyFav = true; 
           }
