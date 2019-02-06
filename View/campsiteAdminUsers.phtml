@@ -10,19 +10,20 @@
     </tr>
   </thead>
   <tbody>
-  <?php $tableRowCount = 1; 
-   foreach ($view->users as $users) {
-    echo'
-    <tr>
+<?php $tableRowCount = 1; 
+   foreach ($view->users as $users): ?>
+    
+  <tr>
     <th scope="row">'.$tableRowCount.'</th>
     <td>'.$users->getName().'</td>
     <td>Null</td>
-    <td><a href="campsiteAdminUsers.php?id="'.$users->getID().' class="btn btn-light">DELETE</a></td>
-  </tr>';
+    <td><a href="campsiteAdminUsers.php?id=<?php echo $users->getID()?>" class="btn btn-light">DELETE</a></td>
+    <td><button>Delete</button></td>
+  </tr>
 
-   $tableRowCount++;
+  <?php $tableRowCount++; ?>
   
-  }?>
+<?php endforeach; ?>
     
   </tbody>
 </table>

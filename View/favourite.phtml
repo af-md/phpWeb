@@ -1,33 +1,62 @@
 <?php require_once('Template/header.phtml') ?>
 <body>
 
-<h2 style="inline-text: center;">My Favorite table</h2>
+<h2 style="inline-text: center;">My Favourites</h2>
+
+<div class="container">
+       <div class="card-search">
+              <div class="row">
 
 
-<div class="container-productcard">
-<div class="card-search">
-       <div class="row">
-       <?php  foreach ($view->campsitesFav as $campsite3) { // Need to adjust these line as it does not create a full object
-    echo '
-  
-              <div class="col-sm-3 col-md-3 col-lg-3">
-                     <div class="card" id="campsite-card">     
-                                   <div class="text-center">
-                            <div class="card-body">
-          
-                                   <h5 class="card-title"> '. $campsite3->getCampsiteName() .' </h5>
-                                   <img class="card-img-top" src="Images/Default.jpg" alt="Card image cap" id="campsite-image">                                                
-                                   <p class="card-text" id="address-card">card address here</p><br>   
-                                   <p class="card-text" id="address-card">card address here</p><br>       
-                            </div>
-                            <a href="#" class="btn btn-primary" id="card-button">Check</a>
-                            <a href="#" class="btn btn-primary" id="card-button">add</a>    
-                            </div>
-                            </div>
-                            
-                     </div>
-               </div>'; }  ?>
+                     <?php  foreach ($view->favCampsites as $campsite): ?> 
+      
+                     <div class="col-sm-3 col-md-3 col-lg-3">
+                                   <div class="card" id="campsite-card">
+                                          <div class="text-center">
+                                                 <div class="card-body">
+                                                        <h5 class="card-title">
+                                                               <?php echo $campsite->getCampsiteName();  ?>
+                                                        </h5>
+                                                        <img class="card-img-top" src=Images/ <?php echo $campsite->getPhoto()
+                                                        ; ?> alt="Card image cap" id="campsite-image">
+                                                        <p class="card-text" id="address-card">card address here</p><br>
+                                                        <form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET">
+                                                               <?php  $ID = $campsite->getCampsiteID();
+                                                              
+                                                              if($userData->isUserLogged()):
+                                                               if($campsiteData->checkCampIdInFavSes($ID)): ?>
+                                                               <input type="submit" name="DisableFav" value="RemoveFav"
+                                                                      class="btn btn-danger">
+                                                               <input type="hidden" name="favouriteCampsiteID" value=<?php
+                                                                      echo $campsite->getCampsiteID(); ?>>
+                                                               <input type="hidden" name="pagination" value=<?php echo
+                                                                      $pageNumber ; ?>>
+                                                               <input type="hidden" name="FavAction" value="remove">
+                                                               <?php else: ?>
+                                                               <input type="submit" name="AddFav" value="AddFav" class="btn btn-success">
+                                                               <input type="hidden" name="favouriteCampsiteID" value=<?php
+                                                                      echo $campsite->getCampsiteID(); ?>>
+                                                               <input type="hidden" name="pagination" value=<?php echo
+                                                                      $pageNumber ; ?>>
+                                                               <input type="hidden" name="FavAction" value="add">
+                                                               <?php endif ?>
+                                                               <?php endif ?>
+                                                        </form>
+                                                 </div>
+                                          </div>
+                                   </div>
 
+                            </div>
+                            <?php endforeach; ?>
+
+
+                       
+                            </div>    
+              </div>
+       </div>
 </div>
-</div>  
+
+
+
+<!-- still need to add pagination -->
 <?php require_once 'Template/footer.phtml'?>

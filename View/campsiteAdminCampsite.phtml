@@ -1,27 +1,47 @@
 <body>
 <h2 style= text-align: center;>Admin Campsite Panel Editing</h2>
-<table class="table">
-  <thead class="thead-light">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Campsite Name</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-  <?php $tableRowCount = 1; 
-   foreach ($view->campsites as $campsites) {
-    echo'
-    <tr>
-    <th scope="row">'.$tableRowCount.'</th>
-    <td>'.$campsites->getName().'</td>
-    <td><a href="campsiteAdminUsers.php?id="'.$campsites->getID().' class="btn btn-light">DELETE</a></td>
-  </tr>';
+<?php if($landingCheck): ?>
+       <div class="container">
+              <div class="card-search">
+                     <div class="row">
+                            <?php  foreach ($view->campsites as $campsite):?>
+                            <div class="col-sm-3 col-md-3 col-lg-3">
+                                   <div class="card" id="campsite-card">
+                                          <div class="text-center">
+                                                 <div class="card-body">
+                                                        <h5 class="card-title">
+                                                               <?php echo $campsite->getCampsiteName();  ?>
+                                                        </h5>
+                                                        <img class="card-img-top" src=Images/ <?php echo $campsite->getPhoto()
+                                                        ; ?> alt="Card image cap" id="campsite-image">
+                                                        <p class="card-text" id="address-card">card address here</p><br>
+                                                        <form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET">
+                                                               <?php  $ID = $campsite->getCampsiteID(); 
+                                                                // var_dump($ID);
+                                                                 //die(); 
+                                                                 if($userData->isUserLogged()):
+                                                                ?>
+                                                               <input type="submit" name="DisableFav" value="Remove"
+                                                                      class="btn btn-danger">
+                                                               <input type="hidden" name="removeCampsiteID" value=<?php
+                                                                      echo $campsite->getCampsiteID(); ?>>
+                                                               <input type="hidden" name="pagination" value=<?php echo
+                                                                      $pageNumber ; ?>>
+                                                               <input type="hidden" name="AdminAction" value="remove">
+                                                               <?php endif ?>
+                                                        </form>
+                                                 </div>
+                                          </div>
+                                   </div>
 
-   $tableRowCount++;
-  
-  }?>
-    
-  </tbody>
-</table>
+                            </div>
+                                   <?php endforeach; ?>
+
+                     </div>
+                     
+              </div>
+
+       </div>
+
+<?php endif ?>
 </body>

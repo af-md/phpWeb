@@ -2,7 +2,7 @@
 
 Class Campsite {
     
-    protected $_id, $_campsiteName, $_campsiteStreetAddress, $_postcode, $__city, $_country, $_latitude, $_longitude, $_photo;
+    protected $_id, $_campsiteName, $_campsiteStreetAddress, $_postcode, $__city, $_country, $_latitude, $_longitude, $_photo, $_shower, $_wifi, $_cafe, $_family, $_water, $_disabled;
     
     public function __construct($dbRow) {
         $this->_id = $dbRow['campsiteID'];
@@ -13,6 +13,12 @@ Class Campsite {
         $this->_country = $dbRow['country'];
         $this->_latitude = $dbRow['latitude'];
         $this->_longitude = $dbRow['longitude'];
+        $this->_shower = $dbRow['shower'];
+        $this->_wifi = $dbRow['wifi'];
+        $this->_cafe = $dbRow['cafe'];
+        $this->_family = $dbRow['family_Friendly'];
+        $this->_water = $dbRow['drinking_water'];
+        $this->_disabled = $dbRow['disabled_facilties'];
       //  $this->_photo = $dbRow['photo'];    
     
     }
@@ -48,6 +54,56 @@ Class Campsite {
      {
          return $this->_photo;
      }
+
+      /***  facility getters      */
+
+    /**
+     * Get the value of _wifi
+     */ 
+    public function get_wifi()
+    {
+        return $this->_wifi;
+    }
+
+    /**
+     * Get the value of _disabled
+     */ 
+    public function get_disabled()
+    {
+        return $this->_disabled;
+    }
+
+    /**
+     * Get the value of _shower
+     */ 
+    public function get_shower()
+    {
+        return $this->_shower;
+    }
+
+    /**
+     * Get the value of _water
+     */ 
+    public function get_water()
+    {
+        return $this->_water;
+    }
+
+    /**
+     * Get the value of _family
+     */ 
+    public function get_family()
+    {
+        return $this->_family;
+    }
+
+    /**
+     * Get the value of _cafe
+     */ 
+    public function get_cafe()
+    {
+        return $this->_cafe;
+    }
 }
 
 

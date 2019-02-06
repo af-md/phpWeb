@@ -1,53 +1,9 @@
 <?php require_once 'Template/header.phtml'; ?>
 
 <body>
-<section>
-        <div class="">
-            <div class="user">
-                <img class="circleImg" src="Images/avatar.png" alt="Avatar">
-                <p class="userName"> Hello <?php echo'.$_SESSION["userUid"].'; ?> </p>
-            </div>
+    
+</body>
 
-            <hr>
-            <nav class="navbar-fixed-left">
-                    <ul>
-                        <li class="leftNav"><a href="campsiteAdminCampsite.php" id="Admin-ref"><i class="fas fa-home"></i>Campsites</a></li><br><br>
-                        <li class="leftNav"><a href="campsiteAdminUsers.php" id="Admin-ref"><i class="fas fa-user"></i> Users</a></li>
-                    </ul>
-            </nav>
-        </div>
-    </section>
-    <div class="container">
-
-        <div class="admin-search">
-            <input type="text" placeholder="search">
-            <button class="" type="submit" name="admin-search">Search</button>
-        </div>
-        <div class="container-admincard">
-        <div class="card-admin">
-        <div class="row">
-
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-
-                    <?php
-//insert some logic checks if the campsite do exists or not.
-
-$countNumber = 1; 
-
-for ($i=0; $i < $nOfPages; $i++) { 
-
-    echo '<li class="page-item"><a class="page-link" href="campsite.php?page='.$i.'">'.$countNumber.'</a></li>';
-
-    $countNumber++;
-}
-
-?>
-                </ul>
-            </nav>
-
-        </div>
-    </div>
 
     <?php require_once 'Template/footer.phtml';?>
 <!-- <li class="page-item"><a class="page-link" href="#">2</a></li> -->

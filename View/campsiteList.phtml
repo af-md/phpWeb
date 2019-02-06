@@ -176,23 +176,24 @@ endif;
                                                         <form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET">
                                                                <?php  $ID = $campsite->getCampsiteID();
                                                               
-                            if($campsiteData->checkCampIdInFavSes($ID)): ?>
+                                                              if($userData->isUserLogged()):
+                                                               if($campsiteData->checkCampIdInFavSes($ID)): ?>
                                                                <input type="submit" name="DisableFav" value="RemoveFav"
                                                                       class="btn btn-danger">
                                                                <input type="hidden" name="favouriteCampsiteID" value=<?php
-                                                                      echo$campsite->getCampsiteID(); ?>>
-                                                               <input type="hidden" name="pagination" value=<?php echo
-                                                                      $pageNumber ; ?>>
-                                                               <input type="hidden" name="FavAction" value="add">
-                                                               <?php else: ?>
-                                                               <input type="submit" name="AddFav" value="AddFav" class="btn btn-success">
-                                                               <input type="hidden" name="favouriteCampsiteID" value=<?php
-                                                                      echo$campsite->getCampsiteID(); ?>>
+                                                                      echo $campsite->getCampsiteID(); ?>>
                                                                <input type="hidden" name="pagination" value=<?php echo
                                                                       $pageNumber ; ?>>
                                                                <input type="hidden" name="FavAction" value="remove">
+                                                               <?php else: ?>
+                                                               <input type="submit" name="AddFav" value="AddFav" class="btn btn-success">
+                                                               <input type="hidden" name="favouriteCampsiteID" value=<?php
+                                                                      echo $campsite->getCampsiteID(); ?>>
+                                                               <input type="hidden" name="pagination" value=<?php echo
+                                                                      $pageNumber ; ?>>
+                                                               <input type="hidden" name="FavAction" value="add">
                                                                <?php endif ?>
-
+                                                               <?php endif ?>
                                                         </form>
                                                  </div>
                                           </div>
@@ -233,6 +234,7 @@ endif;
                                                                <?php  $ID = $campsite->getCampsiteID(); 
                                                                 // var_dump($ID);
                                                                  //die(); 
+                                                                 if($userData->isUserLogged()):
                                                                if($campsiteData->checkCampIdInFavSes($ID)): ?>
                                                                <input type="submit" name="DisableFav" value="RemoveFav"
                                                                       class="btn btn-danger">
@@ -248,6 +250,7 @@ endif;
                                                                <input type="hidden" name="pagination" value=<?php echo
                                                                       $pageNumber ; ?>>
                                                                <input type="hidden" name="FavAction" value="add">
+                                                               <?php endif ?>
                                                                <?php endif ?>
                                                         </form>
                                                  </div>

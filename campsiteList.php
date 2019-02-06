@@ -44,6 +44,8 @@ if(isset($_GET['search-keyword']))
 
     // var_dump($countSearchCampsite);
     // die();
+    
+    if (isset($_GET['pagination'])) {$pageNumber = $_GET['pagination'];}
 
     if ($countSearchCampsite > 5) 
     {

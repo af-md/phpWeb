@@ -162,32 +162,54 @@ class CampsiteDataSet
 
     public function addToFavourite($campsiteid, $userid)
     {
-        $query="INSERT INTO favourites (campsite_id, user_id) VALUES (?,?) ";
+        $query="INSERT INTO favourites (campsite_id, user_id) VALUES (?,?) "; /// inserts the favourite campsiteID in to the database
         $statement = $this->_dbHandle->prepare($query);
         $statement->bindparam(1, $campsiteid);
         $statement->bindparam(2, $userid);
         $statement->execute();
         
-        $favSessArra == $_SESSION['favourites'];
+        $favSessArra = $_SESSION['favourite'];
         
-        array_push($favSessArra, $campsiteid);
+        //array_push($favSessArra['campsite_id'], $campsiteid); // push the new campsite ID in to the array. 
         
-        var_dump($favSessArra); 
+        $favSessArra[]['campsite_id'] = $campsiteid; 
+
+
+            //var_dump($favSessArra); 
+ 
+
+        $_SESSION['favourite'] = $favSessArra; 
         
     }
 
     /**
-     * This function removes the favourite campsites 
+     * This function removes the campsite from the favourite table, so that it's not a favourite campsite anymore.  
      **/
-    public function removeFromFavourite($userid)
+    public function removeFromFavourite($campsiteID)
     {
-        $query="DELETE FROM favourites WHERE user_id=?";
+        $query="DELETE FROM favourites WHERE campsite_id=?"; 
         
-        $statement = $this->d_Handle->prepare($query);
+        $statement = $this->_dbHandle->prepare($query);
         
-        $statement->bindparam($userid, 1);
+        $statement->bindparam(1, $campsiteID);
 
         $statement->execute();
+
+        $favSessArra = $_SESSION['favourite']; // the user
+
+        //$key = array_search($campsiteID, $favSessArra); // use the function "array_search" to find the favourite campsite in the session array and then erase it. 
+        
+        //unset($favSessArra[$key]); // unset the key = element when found in the array
+        
+        foreach($favSessArra as $subKey => $subArray){
+            if($subArray['campsite_id'] == $campsiteID)
+            {
+                 unset($favSessArra[$subKey]);
+            }
+       }
+
+        $_SESSION['favourite'] = $favSessArra; 
+
 
     }
     /**
@@ -232,7 +254,7 @@ class CampsiteDataSet
      */
     public function removeCampsite($campsiteID)
     {
-        $query = "DELETE FROM Camsite WHERE campsiteID = ?";
+        $query = "DELETE FROM Campsite WHERE campsiteID = ?";
         $statement = $this->_dbHandle->prepare($query);
         $statement->bindParam(1, $camspiteID);
         $statement->execute();
@@ -244,13 +266,24 @@ class CampsiteDataSet
     public function checkCampIdInFavSes($ID)
     {
         $isAlreadyFav = false; // create boolean value that sets to true if the campsite ID is in the array already. 
-        for ($i=0; $i < count($_SESSION['favourite']); $i++) // get in to the array and compare if the campsite ID is the same as the one passed in the paramater
-        { 
-          if ($_SESSION['favourite'][$i] == $ID)
-          {
-              $isAlreadyFav = true; 
-          }
+        // for ($i=0; $i < count($_SESSION['favourite']); $i++) // get in to the array and compare if the campsite ID is the same as the one passed in the paramater
+        // { 
+       
+
+        //   if ($_SESSION['favourite'][$i]['campsite_id'] === $ID)  // checking is the ID passed from the parameter, it's the same in the session array. 
+        //   {
+            
+        //   }
+        // }
+        $favSessArra = $_SESSION['favourite']; 
+
+        foreach ($favSessArra as $subKey => $subArray) {
+            if ($subArray['campsite_id'] == $ID) {
+                //unset($favSessArra[$subKey]);
+                $isAlreadyFav = true;
+            }
         }
+        
 
         return $isAlreadyFav; 
         

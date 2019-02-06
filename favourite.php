@@ -21,15 +21,33 @@ $userData = new UserDataSet;
 
 $userID = $_SESSION['id'];
 
+//$favSessArray = $_SESSION['favourite'];
+
+
+
+if (isset($_GET['favouriteCampsiteID'])) /// you could post the fields really. 
+{
+    $favouriteCampsite = $_GET['favouriteCampsiteID'];
+    if (isset($_GET['FavAction']))
+    {
+        $action = $_GET['FavAction'];
+      if ($action == 'remove') {
+            $campsiteData->removeFromFavourite($favouriteCampsite);
+        }
+
+        }
+    //var_dump($favouriteCampsite);
+}
+
+$view->favCampsites = $campsiteData->getFavourite($userID); 
+
+
 
 
 //var_dump($userID);
 //die();
 
 // Get the facourite ID 
-
-$view->campsitesFav = $campsiteData->getFavourite($userID);
-
 //var_dump($view->campsitesFav);
 
 //die();
