@@ -1,4 +1,20 @@
 <body>
+<?php 
+$checkPagination = true; 
+
+// Doing this logic here, gives us more flexibility on what we can do. 
+
+       if($pageNumber > 1)
+       {
+              $directNext = $pageNumber + 1;
+              $directPrevius = $pageNumber - 1; 
+       }
+
+       else {
+              $directPage= $pageNumber + 1;
+              $checkPagination = false; 
+       }
+?>
 <h2 style= text-align: center;>Admin Campsite Panel Editing</h2>
 <?php if($landingCheck): ?>
        <div class="container">
@@ -18,17 +34,16 @@
                                                         <form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET">
                                                                <?php  $ID = $campsite->getCampsiteID(); 
                                                                 // var_dump($ID);
-                                                                 //die(); 
-                                                                 if($userData->isUserLogged()):
+                                                                 //die()                                     
                                                                 ?>
-                                                               <input type="submit" name="DisableFav" value="Remove"
+                                                               <input type="submit" name="RemoveAction" value="Remove"
                                                                       class="btn btn-danger">
                                                                <input type="hidden" name="removeCampsiteID" value=<?php
                                                                       echo $campsite->getCampsiteID(); ?>>
-                                                               <input type="hidden" name="pagination" value=<?php echo
+                                                               <input type="hidden" name="pageNumber" value=<?php echo
                                                                       $pageNumber ; ?>>
                                                                <input type="hidden" name="AdminAction" value="remove">
-                                                               <?php endif ?>
+                                                               
                                                         </form>
                                                  </div>
                                           </div>
@@ -43,5 +58,26 @@
 
        </div>
 
-<?php endif ?>
+
+
+<?php
+                     
+
+// Check if the boolean value is true then do something. 
+if($checkPagination)
+{
+    
+    
+    
+    echo '<li class="page-item"><a class="page-link" href="campsiteList.php?page='. $directPrevius .'">Previous</a></li>'; 
+    echo '<li class="page-item"><a class="page-link" href="campsiteList.php?page='. $directNext .'">Next</a></li>';
+}
+
+else 
+{
+
+    echo '<li class="page-item"><a class="page-link" href="campsiteList.php?page='.$directPage.'">Next</a></li>';
+}
+ ?>
+
 </body>
