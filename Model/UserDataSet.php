@@ -136,7 +136,7 @@ class UserDataSet
       
         $statement = $this->_dbHandle->prepare($query);
 
-        $statement->bindParam(1, $userName); // Bind paramers for safety reasons
+       // $statement->bindParam(1, $userName); // Bind paramers for safety reasons
 
         $statement->execute();
 
@@ -144,8 +144,9 @@ class UserDataSet
 
         while($row = $statement->fetch())
         {
-            $dataSet = new User($row); 
+           $dataSet = new User($row);
         }
+
         return $dataSet;
     }
 

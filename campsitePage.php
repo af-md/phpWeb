@@ -14,5 +14,7 @@ $campsiteData = new CampsiteDataSet;
 
 $userData = new UserDataSet;
 
+$campsiteData->getCampsite(); 
+
 require_once 'View/campsitePage.phtml';
 

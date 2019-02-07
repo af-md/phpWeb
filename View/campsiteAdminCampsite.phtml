@@ -1,3 +1,4 @@
+<?php require_once 'Template/header.phtml'; ?>
 <body>
 <?php 
 $checkPagination = true; 
@@ -16,7 +17,6 @@ $checkPagination = true;
        }
 ?>
 <h2 style= text-align: center;>Admin Campsite Panel Editing</h2>
-<?php if($landingCheck): ?>
        <div class="container">
               <div class="card-search">
                      <div class="row">
@@ -36,9 +36,9 @@ $checkPagination = true;
                                                                 // var_dump($ID);
                                                                  //die()                                     
                                                                 ?>
-                                                               <input type="submit" name="RemoveAction" value="Remove"
+                                                               <input type="submit" name="" value=""
                                                                       class="btn btn-danger">
-                                                               <input type="hidden" name="removeCampsiteID" value=<?php
+                                                               <input type="hidden" name="campsiteID" value=<?php
                                                                       echo $campsite->getCampsiteID(); ?>>
                                                                <input type="hidden" name="pageNumber" value=<?php echo
                                                                       $pageNumber ; ?>>
@@ -69,15 +69,17 @@ if($checkPagination)
     
     
     
-    echo '<li class="page-item"><a class="page-link" href="campsiteList.php?page='. $directPrevius .'">Previous</a></li>'; 
-    echo '<li class="page-item"><a class="page-link" href="campsiteList.php?page='. $directNext .'">Next</a></li>';
+    echo '<li class="page-item"><a class="page-link" href="campsiteAdmin.php?campsitePage=campsitePage&pageNumber='. $directPrevius .'">Previous</a></li>'; 
+    echo '<li class="page-item"><a class="page-link" href="campsiteAdmin.php?campsitePage=campsitePage&pageNumber='. $directNext .'">Next</a></li>';
 }
 
 else 
 {
 
-    echo '<li class="page-item"><a class="page-link" href="campsiteList.php?page='.$directPage.'">Next</a></li>';
+    echo '<li class="page-item"><a class="page-link" href="campsiteAdmin.php?campsitePage=campsitePage&pageNumber='.$directPage.'">Next</a></li>';
 }
  ?>
 
 </body>
+
+<?php require_once 'Template/footer.phtml'; ?>

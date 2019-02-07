@@ -254,9 +254,9 @@ class CampsiteDataSet
      */
     public function removeCampsite($campsiteID)
     {
-        $query = "DELETE FROM Campsite WHERE campsiteID = ?";
+        $query = "DELETE FROM Campsite WHERE campsiteID = ?";   
         $statement = $this->_dbHandle->prepare($query);
-        $statement->bindParam(1, $camspiteID);
+        $statement->bindParam(1, $campsiteID);
         $statement->execute();
     }
 

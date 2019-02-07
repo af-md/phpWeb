@@ -12,13 +12,14 @@ class User
     protected $_firstname;
     protected $_lastname;
     protected $_adminPriviligies; 
+
     public function __construct($dbRow) // pass an associative array to the campsite file. 
     {
         $this->_id = $dbRow['userID']; 
         $this->_firstname = $dbRow['firstname'];
         $this->_lastname = $dbRow['lastname'];
         $this->_userName = $dbRow['userName'];
-        $this->_password = $dbRow['userPassword'];
+      //  $this->_password = $dbRow['userPassword'];
         $this->_adminPriviligies = $dbRow['isAdmin'];
 
     }
