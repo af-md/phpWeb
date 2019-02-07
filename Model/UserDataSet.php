@@ -132,7 +132,7 @@ class UserDataSet
      */
     public function getAllUserSignedUp()
     {
-        $query = "SELECT * FROM User";
+        $query = "SELECT userID, userName, firstname, lastname, isAdmin FROM User";
       
         $statement = $this->_dbHandle->prepare($query);
 
@@ -140,11 +140,11 @@ class UserDataSet
 
         $statement->execute();
 
-        $dataSet = [];
+        //$dataSet = [];
 
         while($row = $statement->fetch())
         {
-           $dataSet = new User($row);
+           $dataSet[] = new User($row);
         }
 
         return $dataSet;

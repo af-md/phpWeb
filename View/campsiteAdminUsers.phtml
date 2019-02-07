@@ -19,7 +19,7 @@
     <td><?php echo $user->getFirstName() ?></td>
     <td><?php echo $user->getUserName() ?></td>
     <form action="<?php $_SERVER['PHP_SELF']?>" method="GET">
-    <input type="hidden" name="userID" value="<?php echo $user->getID()?>">
+    <input type="hidden" name="userID" value="<?php echo $user->getUserID()?>">
     <td><button class="btn btn-light">DELETE</button></td>
     </form>
   </tr>

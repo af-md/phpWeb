@@ -288,4 +288,23 @@ class CampsiteDataSet
         return $isAlreadyFav; 
         
     }
+
+    /**
+     * Insert a new campsite in the database 
+     * @param mixed campsite Details
+     * @return null 
+     **/
+    
+     public function insertCampsite($campsiteName, $campsiteStreet, $campsitePostcode, $campsiteCity, $campsiteCountry) 
+     {
+         $sql = "INSERT INTO Campsite (campsiteName, StreetAddress, postcode, city, country) VALUES (?,?,?,?,?)";  
+         $statement = $this->_dbHandle->prepare($sql);
+         $statement->bindParam(1, $campsiteName); // Bind paramers for safety reasons
+         $statement->bindParam(2, $campsiteStreet); // Bind paramers for safety reasons
+         $statement->bindParam(3, $campsitePostcode); // Bind paramers for safety reasons
+         $statement->bindParam(4, $campsiteCity); // Bind paramers for safety reasons
+         $statement->bindParam(5, $campsiteCountry); // Bind paramers for safety reasons            
+         $statement->execute();
+     }
+     
 }

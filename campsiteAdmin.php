@@ -41,7 +41,7 @@ elseif(isset($_GET['userID']))
         $userID = $_GET['userID'];
         $userData->removeUser($userID);
         $view->users = $userData->getAllUserSignedUp();
-        require_once 'View/campsiteAdminUser.phtml';   
+        require_once 'View/campsiteAdminUsers.phtml';   
 }
 elseif(isset($_GET['campsiteID']))
 {
