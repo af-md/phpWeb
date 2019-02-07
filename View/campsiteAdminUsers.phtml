@@ -1,11 +1,12 @@
+<title><?php echo $view->page?></title>
 <body>
 <h2 style= text-align: center;>Admin User Panel Editing</h2>
 <table class="table">
   <thead class="thead-light">
     <tr>
       <th scope="col">#</th>
-      <th scope="col">UserName</th>
-      <th scope="col">CampsiteOwned</th>
+      <th scope="col">Firstname</th>
+      <th scope="col">Username</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
@@ -14,11 +15,13 @@
    foreach ($view->users as $users): ?>
     
   <tr>
-    <th scope="row">'.$tableRowCount.'</th>
-    <td>'.$users->getName().'</td>
-    <td>Null</td>
-    <td><a href="campsiteAdminUsers.php?id=<?php echo $users->getID()?>" class="btn btn-light">DELETE</a></td>
-    <td><button>Delete</button></td>
+    <th scope="row"><?php echo $tableRowCount ?></th>
+    <td><?php echo $users->getFirstName() ?></td>
+    <td><?php echo $users->getUserName() ?></td>
+    <form action="<?php $_SERVER['PHP_SELF']?>" method="GET">
+    <input type="hidden" name="userID" value="<?php echo $users->getID()?>">
+    <td><button class="btn btn-light">DELETE</button></td>
+    </form>
   </tr>
 
   <?php $tableRowCount++; ?>

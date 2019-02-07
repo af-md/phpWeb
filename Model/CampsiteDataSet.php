@@ -49,7 +49,7 @@ class CampsiteDataSet
     {
         $offset = ($pageNumber - 1)* $limit;
 
-        $query = "select Campsite.campsiteID, Campsite.campsiteName, Campsite.StreetAddress, Campsite.postcode, Campsite.city, Campsite.country, Campsite.longitude, Campsite.latitude, Photo.photo FROM Campsite inner join Photo on Photo.campsiteID = Campsite.campsiteID  LIMIT ?,?" ;
+        $query = "select Campsite.campsiteID, Campsite.campsiteName, Campsite.StreetAddress, Campsite.postcode, Campsite.city, Campsite.country, Campsite.longitude, Campsite.latitude, Photo.photo, Facilities.shower, Facilities.wifi, Facilities.cafe, Facilities.family_friendly, Facilities.drinking_water, Facilities.disabled_facilities FROM Campsite inner join Photo on Photo.campsiteID = Campsite.campsiteID inner join Facilities on Facilities.campsiteID = Campsite.campsiteID  LIMIT ?,?" ;
 
         $statement = $this->_dbHandle->prepare($query); // prepare a PDO statement
         

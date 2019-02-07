@@ -28,9 +28,19 @@ elseif (isset($_GET['campsitePage']))
 
 }
 
-else {
-
-    require_once "View/campsiteAdmin.phtml";
+elseif(isset($_GET['userID']))
+{
+    $userID = $_GET['userID'];
+    $userData->removeUser($userID); 
+    $view->users = $userData->getAllUserSignedUp(); 
+    require_once 'View/campsiteAdminUser.phtml';
+}
+elseif(isset($_GET['campsiteID']))
+{
+    $campsiteID = $_GET['campsiteID']; 
+    $campsiteData->removeCampsite($campsiteID); 
+    $view->campsites = $campsiteData->fetchSomeCampsites($pageNumber, $limit); 
+    require_once 'View/campsiteAdminCampsite.phtml';
 }
 
 

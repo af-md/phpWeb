@@ -16,9 +16,9 @@ Class Campsite {
         $this->_shower = $dbRow['shower'];
         $this->_wifi = $dbRow['wifi'];
         $this->_cafe = $dbRow['cafe'];
-        $this->_family = $dbRow['family_Friendly'];
+        $this->_family = $dbRow['family_friendly'];
         $this->_water = $dbRow['drinking_water'];
-        $this->_disabled = $dbRow['disabled_facilties'];
+        $this->_disabled = $dbRow['disabled_facilities'];
       //  $this->_photo = $dbRow['photo'];    
     
     }
