@@ -70,7 +70,7 @@ class CampsiteDataSet
 
     public function fetchSomeCampsitesFromSearch( $searchField)
     {
-        $query = "select Campsite.campsiteID, Campsite.campsiteName, Campsite.StreetAddress, Campsite.postcode, Campsite.city, Campsite.country, Campsite.longitude, Campsite.latitude, Photo.photo FROM Campsite inner join Photo on Photo.campsiteID = Campsite.campsiteID WHERE Campsite.campsiteName = ?" ;
+        $query = "select Campsite.campsiteID, Campsite.campsiteName, Campsite.StreetAddress, Campsite.postcode, Campsite.city, Campsite.country, Campsite.longitude, Campsite.latitude, Photo.photo, Facilities.shower, Facilities.wifi, Facilities.cafe, Facilities.family_friendly, Facilities.drinking_water, Facilities.disabled_facilities FROM Campsite inner join Photo on Photo.campsiteID = Campsite.campsiteID inner join Facilities on Facilities.campsiteID = Campsite.campsiteID WHERE Campsite.campsiteName = ?" ;
 
         $statement = $this->_dbHandle->prepare($query); // prepare a PDO statement
         
@@ -90,7 +90,15 @@ class CampsiteDataSet
         }
         return $dataSet;
     }
-    
+
+    /**
+     * Filter down the search. 
+     */
+    public function searchFilter()
+    {
+        
+    }
+
 
      /**
      * This function counts all the entries in the database 

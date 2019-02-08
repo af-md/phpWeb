@@ -30,31 +30,37 @@ $limit= 5; // set the limit of entries to show per page.
 
 $favouriteCampsite = " "; 
 
-if(isset($_GET['search-keyword']))
-{
-    $searchCheck = true; 
+if (isset($_GET['search-action'])) {
+    $searchActionCheck = $_GET['search-action'];
+    if ($searchActionCheck == 'searchBar') {
+        $searchCheck = true;
 
-    $searchKeyword = $_GET['search-keyword'];
+        $searchKeyword = $_GET['search-keyword'];
 
-    $view->searchCampsite = $campsiteData->fetchSomeCampsitesFromSearch($searchKeyword);
+        $view->searchCampsite = $campsiteData->fetchSomeCampsitesFromSearch($searchKeyword);
 
-    // Paginatin for the search option
+        // Paginatin for the search option
 
-    $countSearchCampsite = count($campsiteData->fetchSomeCampsitesFromSearch($searchKeyword)); 
+        $countSearchCampsite = count($campsiteData->fetchSomeCampsitesFromSearch($searchKeyword));
 
-    // var_dump($countSearchCampsite);
-    // die();
+        // var_dump($countSearchCampsite);
+        // die();
     
-    if (isset($_GET['pagination'])) {$pageNumber = $_GET['pagination'];}
+        if (isset($_GET['pagination'])) {
+            $pageNumber = $_GET['pagination'];
+        }
 
-    if ($countSearchCampsite > 5) 
-    {
-        $pagingCheck = true;
+        if ($countSearchCampsite > 5) {
+            $pagingCheck = true;
 
-        $pageNumber = 1; 
+            $pageNumber = 1;
+        }
+        // I have to add the favourite bit here as well.
     }
-    // I have to add the favourite bit here as well. 
-
+    elseif ($searchActionCheck == 'searchFilter') {
+        
+        //$cafe = ; 
+    }
 }
 else {
     # code...
