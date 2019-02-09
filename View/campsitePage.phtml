@@ -1,66 +1,75 @@
 <?php require_once('Template/header.phtml') ?>
 <body>
-<div class="container">
-        <div class="row">
-            <div class="col-sm-8 col-md-6  col-lg-4">
-                <div><img src="Images/default.jpg"></div>
-            </div>
-            <div class="col-sm-8 col-md-6 col-lg-4">
-                    <div>
-                        <table>
-                            <tr>
-                                <th colspan="2">Facility</th>
-                                <th>Avaliability</th>
-                            </tr>
-                            <tr>
-                                <td><i class="fas fa-shower"></i></td>  
-                                <td>shower</td>
-                                <td>Yes</td>
-                            </tr>
-                            <tr>
-                                <td><i class="fas fa-wifi"></i></td>
-                                <td>wifi</td>
-                                <td>Yes</td>
-                            </tr>
-                            <tr>
-                                <td><i class="fas fa-coffee"></i></td>
-                                <td>Coffee</td>
-                                <td>Yes</td>
-                            </tr>
-                            <tr>
-                                <td><i class="fab fa-accessible-icon"></i></td>
-                                <td>Accessible</td>
-                                <td>Yes</td>
-                            </tr>
-                            <tr>
-                                <td>  <i class="fas fa-tint"></i></td>
-                                <td>Water</td>
-                                <td>Yes</td>
-                            </tr>
-                            <tr>
-                                <td><i class="far fa-smile"></i></td>
-                                <td>Family</td>
-                                <td>Yes</td>
-                            </tr>
-                        </table>
-                    </div>
+<div class="container" id="container-campsitePage">
+<h2 class="title-campsitePage"><?php echo $campsite->getCampsiteName(); ?></h2>    
+    <div class="row">
+        <div class="col-sm-8 col-md-6  col-lg-4">
+            <div><img src="Images/default.jpg"></div>
+            <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi distinctio impedit mollitia aliquid
+                adipisci est eius at laborum consequuntur quam inventore, corrupti nesciunt id consequatur nisi
+                tenetur sunt exercitationem minus. </div>
+        </div>
+        <div class="col-sm-8 col-md-6 col-lg-8 " id="campsite-table">
+                <div>
+                    <table class="table table-hover">
+                        <tr>
+                            <th scope="col" colspan="2">Facility</th>
+                            <th scope="col">Avaliability</th>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-shower"></i></td>  
+                            <td>shower</td>
+                            <td><?php if($campsite->get_cafe()){echo 'yes';}else{echo 'no';}?></td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-wifi"></i></td>
+                            <td>wifi</td>
+                            <td><?php if($campsite->get_wifi()){echo 'yes';}else{echo 'no';}?></td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-coffee"></i></td>
+                            <td>Coffee</td>
+                            <td><?php if($campsite->get_cafe()){echo 'yes';}else{echo 'no';}?></td>
+                        </tr>
+                        <tr>
+                            <td><i class="fab fa-accessible-icon"></i></td>
+                            <td>Accessibility</td>
+                            <td><?php if($campsite->get_disabled()){echo 'yes';}else{echo 'no';}?></td>
+                        </tr>
+                        <tr>
+                            <td>  <i class="fas fa-tint"></i></td>
+                            <td>Water</td>
+                            <td><?php if($campsite->get_water()
+                              ){echo 'yes';}else{echo 'no';}?></td>
+                        </tr>
+                        <tr>
+                            <td><i class="far fa-smile"></i></td>
+                            <td>Family</td>
+                            <td><?php if($campsite->get_family()){echo 'yes';}else{echo 'no';}?></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-8 col-md-6 col-lg-4">
-                <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi distinctio impedit mollitia aliquid
-                    adipisci est eius at laborum consequuntur quam inventore, corrupti nesciunt id consequatur nisi
-                    tenetur sunt exercitationem minus. </div>
-            </div>
-
-        <div class="row">
-            <div class="col-sm-8 col-md-6 col-lg-4">
-                <div> <button>afsdf</button></div>
-            </div>
-        </div>
-
     </div>
+    <div class="row" id="rating-row-campsitePage">
+        <div class="col-sm-8 col-md-6 col-lg-4">
+            <form action="">
+            <div class="form-group">
+    <label for="exampleFormControlSelect1">Example select</label>
+    <select class="form-control" id="exampleFormControlSelect1">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+    </select>
+  </div>
+            </form>
+        </div>
+    </div>
+
+</div>
 </div>
 
 <?php require_once('Template/footer.phtml') ?>

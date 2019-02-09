@@ -214,15 +214,17 @@ endif;
                      <div class="card" id="campsite-card">
                             <div class="text-center">
                                    <div class="card-body">
-                                          <h5 class="card-title">
-                                                 <?php echo $campsite->getCampsiteName();  ?>
-                                          </h5>
-                                          <div class="col-4">
+                                         
+                                          <div class="col-4" style="float:left;">
                                                  <img class="card-img-top" src=Images/ <?php echo $campsite->getPhoto()
                                                  ; ?> alt="Card image cap" id="campsite-image">
                                           </div>
-                                          <div class="col-8">
+                                          <div class="col-8" style="float:right;">
+                                          <h5 class="card-title">
+                                                 <?php echo $campsite->getCampsiteName();  ?>
+                                          </h5>
                                                  <p class="card-text" id="address-card">card address here</p><br>
+                                                 <a href="campsitePage.php?campsiteID=<?php echo $campsite->getCampsiteID(); ?>"class="btn btn-secondary">View</a>
                                                  <form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET">
                                                         <?php  $ID = $campsite->getCampsiteID();
                                                               

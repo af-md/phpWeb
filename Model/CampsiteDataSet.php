@@ -316,7 +316,16 @@ class CampsiteDataSet
      }
 
      /**
-      * Encrypted
+      * Get a single campsite to display in the view. 
       */
-     
+     public function getCampsite($campsiteID)
+     {
+        $query ="select Campsite.campsiteID, Campsite.campsiteName, Campsite.StreetAddress, Campsite.postcode, Campsite.city, Campsite.country, Campsite.longitude, Campsite.latitude, Photo.photo, Facilities.shower, Facilities.wifi, Facilities.cafe, Facilities.family_friendly, Facilities.drinking_water, Facilities.disabled_facilities FROM Campsite inner join Photo on Photo.campsiteID = Campsite.campsiteID inner join Facilities on Facilities.campsiteID = Campsite.campsiteID WHERE Campsite.campsiteID = ?";
+        $statement = $this->_dbHandle->prepare($query);
+        $statement->bindParam(1, $campsiteID); // Bind paramers for safety reasons
+        $statement->execute();
+        $row = $statement->fetch();
+        $dataset = new Campsite($row); 
+        return $dataset; 
+     }
 }

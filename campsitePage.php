@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require_once 'Model/CampsiteDataSet.php';
 
@@ -14,7 +14,11 @@ $campsiteData = new CampsiteDataSet;
 
 $userData = new UserDataSet;
 
-$campsiteData->getCampsite(); 
+if (isset($_GET['campsiteID'])) {
+    $campsiteID = $_GET['campsiteID'];
+    $campsite = $campsiteData->getCampsite($campsiteID);
+}
+
+
 
 require_once 'View/campsitePage.phtml';
-
