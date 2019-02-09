@@ -21,12 +21,11 @@ body{
   padding-right: 20px;
 }
 
-.paragraphContainer p{
-
-  padding-left: 500px;
-}
-
 /* Cards style */
+
+.card-style{
+  margin-bottom: 30px; 
+}
 
 /* Icons font awesome style */
 
@@ -193,7 +192,7 @@ float: right;
   background-color: #F7F7F7;
   /* just in case there no content*/
   padding: 20px 25px 30px;
-  width: 100%; 
+  width: 80%; 
   border-radius: 2px;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
 }
@@ -301,6 +300,13 @@ float: right;
   height: 40px; 
 }
 
+/* Pagination buttons */
+
+.anchorPagination{
+  text-align: center; 
+}
+
+.
 
 /* Admin page style */
 
@@ -377,8 +383,20 @@ padding-left: 25    0px;
 }
 @media (max-width: 576px) {
 .search-button{
-  margin-left: 0px;
-  margin-top: 0px;
+  margin-left: auto;
+  margin-top: auto;
+  width: 350px; 
+}
+
+.media-filter-central{
+  margin-left: auto; 
+  margin-right: auto; 
+  width: auto; 
+}
+.media-card-central{
+  margin-left: auto; 
+  margin-right: auto; 
+  width: auto; 
 }
 }
 

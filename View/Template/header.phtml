@@ -15,7 +15,7 @@
 
     <script src="css/js/bootstrap.min.js"></script>
 
-    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="css/jquery-3.3.1.js"></script> 
 
     <!--css-->
 
@@ -70,22 +70,21 @@
                 }
                 else {
                     echo '
-                <li class="nav-item">
-                    <a href="logout.php">Logout</a>
-                </li> 
-                <li class="nav-item">
-                <a href="favourite.php">Favourites</a>
-            </li>
-            <li class="nav-item">
-                <a href="addCampsite.php">Add Your Campsite</a>
-            </li> 
-            <li>
-                    <a href="campsiteAdmin.php" >Admin Panel</a>
-                </li>
-            <li class="nav-item">
-            <a href="userProfile.php">My Profile</a>
-        </li>   
-                </ul> 
+                            <li class="nav-item">
+                                <a href="logout.php">Logout</a>
+                            </li> 
+                            <li class="nav-item">
+                            <a href="favourite.php">Favourites</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="addCampsite.php">Add Your Campsite</a>
+                        </li> 
+                        <li>
+                                <a href="campsiteAdmin.php" >Admin Panel</a>
+                            </li>
+                        <li class="nav-item">
+                        <a href="userProfile.php">My Profile</a>
+                    </li>   
                 <div class="dropdown">
         <button class = "btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Admin Feature
@@ -94,9 +93,10 @@
             <a class="dropdown-item" href="campsiteAdmin.php?campsitePage=campsitePage&pageNumber=1">Campsite</a>
             <a class="dropdown-item" href="campsiteAdmin.php?userPage=userPage">User</a>
         </div>
-        </div>';
+        </div>
+        </ul> ';
                 }
                 ?>
-            </div>
+            
         </div>
     </nav>

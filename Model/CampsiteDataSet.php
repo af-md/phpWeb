@@ -96,7 +96,7 @@ class CampsiteDataSet
      */
     public function searchFilter()
     {
-        
+
     }
 
 
@@ -314,5 +314,9 @@ class CampsiteDataSet
          $statement->bindParam(5, $campsiteCountry); // Bind paramers for safety reasons            
          $statement->execute();
      }
+
+     /**
+      * Encrypted
+      */
      
 }
