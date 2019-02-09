@@ -2,7 +2,7 @@
 
 Class Campsite {
     
-    protected $_id, $_campsiteName, $_campsiteStreetAddress, $_postcode, $__city, $_country, $_latitude, $_longitude, $_photo, $_shower, $_wifi, $_cafe, $_family, $_water, $_disabled;
+    protected $_id, $_campsiteName, $_campsiteStreetAddress, $_postcode, $__city, $_country, $_latitude, $_longitude, $_photo, $_shower, $_wifi, $_cafe, $_family, $_water, $_disabled, $_ownerName, $_ownerContact;
     
     public function __construct($dbRow) {
         $this->_id = $dbRow['campsiteID'];
@@ -19,8 +19,10 @@ Class Campsite {
         $this->_family = $dbRow['family_friendly'];
         $this->_water = $dbRow['drinking_water'];
         $this->_disabled = $dbRow['disabled_facilities'];
-      //  $this->_photo = $dbRow['photo'];    
-    
+        $this->_photo = $dbRow['photo']; 
+        $this->_ownerName = $dbRow['ownerName'];   
+        $this->_ownerContact = $dbRow['ownerContact'];  
+         
     }
 
        // set the getters 
@@ -103,6 +105,22 @@ Class Campsite {
     public function get_cafe()
     {
         return $this->_cafe;
+    }
+
+    /**
+     * Get the value of _ownerName
+     */ 
+    public function get_ownerName()
+    {
+        return $this->_ownerName;
+    }
+
+    /**
+     * Get the value of _ownerContact
+     */ 
+    public function get_ownerContact()
+    {
+        return $this->_ownerContact;
     }
 }
 

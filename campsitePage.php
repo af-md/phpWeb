@@ -19,6 +19,31 @@ if (isset($_GET['campsiteID'])) {
     $campsite = $campsiteData->getCampsite($campsiteID);
 }
 
+if (isset($_POST['submit'])) {
+    $campsiteID = $_POST['campsiteID']; 
+    $ratingValue = $_POST['rating-input-5'];
+    if ($ratingValue == 'rating-input-1-1-5') {
+        $ratingValue = 1;   
+    }
+    elseif ($ratingValue == 'rating-input-1-2-5') {
+        # code...
+        $ratingValue = 2;
+    }
+    elseif ($ratingValue == 'rating-input-1-3-5') {
+        # code...
+        $ratingValue = 3;
+    }
+    elseif ($ratingValue == 'rating-input-1-4-5') {
+        # code...
+        $ratingValue = 4;
+    }
+    elseif ($ratingValue == 'rating-input-1-5-5') {
+        # code...
+        $ratingValue = 5;
+    }
+    $campsiteData->insertRating($campsiteID, $ratingValue); 
+}
+
 
 
 require_once 'View/campsitePage.phtml';

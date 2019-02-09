@@ -45,7 +45,7 @@ endif;
                                           <p>Filter from country </p>
                                    </label>
                                    <select multiple class="form-control" id="exampleFormControlSelect2">
-                                          <option>Albania</option name="dd">
+                                          <option>Albia</option name="dd">
                                           <option>Austria</option>
                                           <option>Bulgaria</option>
                                           <option>Croatia</option>
@@ -162,8 +162,7 @@ endif;
                                                  <?php echo $campsite->getCampsiteName();  ?>
                                           </h5>
                                           <div class="col-4">
-                                                 <img class="card-img-top" src=Images/ <?php echo $campsite->getPhoto()
-                                                 ; ?> alt="Card image cap" id="campsite-image">
+                                                 <img class="card-img-top" src=Images/<?php echo $campsite->getPhoto(); ?> alt="Card image cap" id="campsite-image">
                                           </div>
                                           <div class="col-8">
                                                  <p class="card-text" id="address-card">card address here</p><br>
@@ -214,16 +213,16 @@ endif;
                      <div class="card" id="campsite-card">
                             <div class="text-center">
                                    <div class="card-body">
-                                         
                                           <div class="col-4" style="float:left;">
-                                                 <img class="card-img-top" src=Images/ <?php echo $campsite->getPhoto()
+                                                 <img class="card-img-top" src=Images/<?php echo $campsite->getPhoto()
                                                  ; ?> alt="Card image cap" id="campsite-image">
                                           </div>
                                           <div class="col-8" style="float:right;">
                                           <h5 class="card-title">
                                                  <?php echo $campsite->getCampsiteName();  ?>
                                           </h5>
-                                                 <p class="card-text" id="address-card">card address here</p><br>
+                                          <div><?php echo $campsite->getCity();?> </div>
+                                           <div><?php echo $campsite->getCountry();?> </div>
                                                  <a href="campsitePage.php?campsiteID=<?php echo $campsite->getCampsiteID(); ?>"class="btn btn-secondary">View</a>
                                                  <form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET">
                                                         <?php  $ID = $campsite->getCampsiteID();

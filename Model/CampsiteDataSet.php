@@ -49,7 +49,7 @@ class CampsiteDataSet
     {
         $offset = ($pageNumber - 1)* $limit;
 
-        $query = "select Campsite.campsiteID, Campsite.campsiteName, Campsite.StreetAddress, Campsite.postcode, Campsite.city, Campsite.country, Campsite.longitude, Campsite.latitude, Photo.photo, Facilities.shower, Facilities.wifi, Facilities.cafe, Facilities.family_friendly, Facilities.drinking_water, Facilities.disabled_facilities FROM Campsite inner join Photo on Photo.campsiteID = Campsite.campsiteID inner join Facilities on Facilities.campsiteID = Campsite.campsiteID  LIMIT ?,?" ;
+        $query = "select Campsite.campsiteID, Campsite.campsiteName, Campsite.StreetAddress, Campsite.postcode, Campsite.city, Campsite.country, Campsite.longitude, Campsite.latitude,  Campsite.ownerName, Campsite.ownerContact, Photo.photo, Facilities.shower, Facilities.wifi, Facilities.cafe, Facilities.family_friendly, Facilities.drinking_water, Facilities.disabled_facilities FROM Campsite inner join Photo on Photo.campsiteID = Campsite.campsiteID inner join Facilities on Facilities.campsiteID = Campsite.campsiteID  LIMIT ?,?" ;
 
         $statement = $this->_dbHandle->prepare($query); // prepare a PDO statement
         
@@ -68,7 +68,7 @@ class CampsiteDataSet
         return $dataSet;
     }
 
-    public function fetchSomeCampsitesFromSearch( $searchField)
+    public function fetchSomeCampsitesFromSearch($searchField)
     {
         $query = "select Campsite.campsiteID, Campsite.campsiteName, Campsite.StreetAddress, Campsite.postcode, Campsite.city, Campsite.country, Campsite.longitude, Campsite.latitude, Photo.photo, Facilities.shower, Facilities.wifi, Facilities.cafe, Facilities.family_friendly, Facilities.drinking_water, Facilities.disabled_facilities FROM Campsite inner join Photo on Photo.campsiteID = Campsite.campsiteID inner join Facilities on Facilities.campsiteID = Campsite.campsiteID WHERE Campsite.campsiteName = ?" ;
 
@@ -231,7 +231,7 @@ class CampsiteDataSet
      **/
     public function getFavourite($userid)
     {
-        $sql =  "Select Campsite.campsiteID, Campsite.campsiteName, Campsite.StreetAddress, Campsite.postcode, Campsite.city, Campsite.country, Campsite.latitude, Campsite.longitude  FROM favourites RIGHT JOIN Campsite ON favourites.campsite_id = Campsite.campsiteID WHERE favourites.user_id = ?";
+        $sql =  "Select Campsite.campsiteID, Campsite.campsiteName, Campsite.StreetAddress, Campsite.postcode, Campsite.city, Campsite.country, Campsite.ownerName, Campsite.ownerContact, Campsite.latitude, Campsite.longitude, Photo.photo FROM favourites RIGHT JOIN on Photo ON Campsite.campsiteID = Photo.campsiteID RIGHT JOIN Campsite ON favourites.campsite_id = Campsite.campsiteID WHERE favourites.user_id = ?";
      
         $statement = $this->_dbHandle->prepare($sql);
 
@@ -320,12 +320,25 @@ class CampsiteDataSet
       */
      public function getCampsite($campsiteID)
      {
-        $query ="select Campsite.campsiteID, Campsite.campsiteName, Campsite.StreetAddress, Campsite.postcode, Campsite.city, Campsite.country, Campsite.longitude, Campsite.latitude, Photo.photo, Facilities.shower, Facilities.wifi, Facilities.cafe, Facilities.family_friendly, Facilities.drinking_water, Facilities.disabled_facilities FROM Campsite inner join Photo on Photo.campsiteID = Campsite.campsiteID inner join Facilities on Facilities.campsiteID = Campsite.campsiteID WHERE Campsite.campsiteID = ?";
+        $query ="select Campsite.campsiteID, Campsite.campsiteName, Campsite.StreetAddress, Campsite.postcode, Campsite.city, Campsite.country, Campsite.longitude, Campsite.latitude, Campsite.ownerName, Campsite.ownerContact, Photo.photo, Facilities.shower, Facilities.wifi, Facilities.cafe, Facilities.family_friendly, Facilities.drinking_water, Facilities.disabled_facilities FROM Campsite inner join Photo on Photo.campsiteID = Campsite.campsiteID inner join Facilities on Facilities.campsiteID = Campsite.campsiteID WHERE Campsite.campsiteID = ?";
         $statement = $this->_dbHandle->prepare($query);
         $statement->bindParam(1, $campsiteID); // Bind paramers for safety reasons
         $statement->execute();
         $row = $statement->fetch();
         $dataset = new Campsite($row); 
         return $dataset; 
+     }
+
+     /** 
+      * Function to leave a rating for a specific campsite; 
+     */
+
+     public function insertRating($campsiteID, $ratingValue)
+     {
+        $query = "INSERT INTO Ratings (rating, campsite_id) VALUES (?,?)";
+        $statement = $this->_dbHandle->prepare($query);
+        $statement->bindParam(1, $ratingValue); // Bind paramers for safety reasons
+        $statement->bindParam(2, $campsiteID); // Bind paramers for safety reasons
+        $statement->execute();
      }
 }
