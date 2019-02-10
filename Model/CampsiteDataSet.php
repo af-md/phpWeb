@@ -94,19 +94,109 @@ class CampsiteDataSet
     /**
      * Return the data requested for filtering down. 
      */
-    public function searchFilter()
+    public function searchFilter($country, $ratingValue, $shower, $wifi, $cafe, $family, $water, $accessibility)
     {
         // joing the different tables relevant to it. 
-        $sql ="select Campsite.campsiteID, Campsite.campsiteName, Campsite.StreetAddress, Campsite.postcode, Campsite.city, Campsite.country, Campsite.longitude, Campsite.latitude,  Campsite.ownerName, Campsite.ownerContact, Photo.photo, Facilities.shower, Facilities.wifi, Facilities.cafe, Facilities.family_friendly, Facilities.drinking_water, Facilities.disabled_facilities FROM Campsite inner join Photo on Photo.campsiteID = Campsite.campsiteID inner join Facilities on Facilities.campsiteID = Campsite.campsiteID "; 
+        $sql ="select Campsite.campsiteID, Campsite.campsiteName, Campsite.StreetAddress, Campsite.postcode, Campsite.city, Campsite.country, Campsite.longitude, Campsite.latitude,  Campsite.ownerName, Campsite.ownerContact, Photo.photo, Facilities.shower, Facilities.wifi, Facilities.cafe, Facilities.family_friendly, Facilities.drinking_water, Facilities.disabled_facilities, Ratings.rating FROM Campsite inner join Ratings on Ratings.campsite_id = Campsite.campsiteID inner join Photo on Photo.campsiteID = Campsite.campsiteID inner join Facilities on Facilities.campsiteID = Campsite.campsiteID"; 
 
         // isnsert a check system in here to assign something 
-        
+         
+       
+        // country logic
+        if($country)
+        {
+            $sql = " WHERE Campsite.country = ?";
+            $statement->bindParam(1, $country);
+        }
+
+         // facilities logic; 
+         if ($country) {
+                    if($shower > 0)
+                {
+                    $sql = " AND WHERE Facilities.shower = ?";
+                    $statement->bindParam(2, $country);
+                }
+                if($wifi > 0)
+                {
+                    $sql = " AND WHERE Facilities.wifi = ?";
+                }
+                if($cafe> 0)
+                {
+                    $sql = " AND WHERE Facilities.cafe = ?";
+                }
+                if($family > 0)
+                {
+                    $sql = " AND WHERE Facilities.family_friendly = ?";
+                }
+                if($water> 0)
+                {
+                    $sql = " AND WHERE Facilities.water = ?";
+                }
+                if($accessibility> 0)
+                {
+            $sql = " AND WHERE Facilities.disable_facilities = ?";
+        }
+        else {
+            if($shower > 0)
+                {
+                    $sql = " WHERE Facilities.shower = ?";
+                    $statement->bindParam(2, $country);
+                }
+                if($wifi > 0)
+                {
+                    $sql = " AND WHERE Facilities.wifi = ?";
+                }
+                if($cafe> 0)
+                {
+                    $sql = " AND WHERE Facilities.cafe = ?";
+                }
+                if($family > 0)
+                {
+                    $sql = " AND WHERE Facilities.family_friendly = ?";
+                }
+                if($water> 0)
+                {
+                    $sql = " AND WHERE Facilities.water = ?";
+                }
+                if($accessibility> 0)
+                {
+            $sql = " AND WHERE Facilities.disable_facilities = ?";
+        }
+
+         }
+        if($shower > 0)
+        {
+            $sql = " AND WHERE Facilities.shower = ?";
+            $statement->bindParam(2, $country);
+        }
+        if($wifi > 0)
+        {
+            $sql = " AND WHERE Facilities.wifi = ?";
+        }
+        if($cafe> 0)
+        {
+            $sql = " AND WHERE Facilities.cafe = ?";
+        }
+        if($family > 0)
+        {
+            $sql = " AND WHERE Facilities.family_friendly = ?";
+        }
+        if($water> 0)
+        {
+            $sql = " AND WHERE Facilities.water = ?";
+        }
+        if($accessibility> 0)
+        {
+            $sql = " AND WHERE Facilities.disable_facilities = ?";
+        }
+
         // create the view and keep coding 
-        $sql2 = "ljjlkj"; 
-
-        $sql = $sql2; 
-
-        $sql = ; 
+        // rating logic 
+        if($ratingValue > 0)
+        { 
+             $sql = " AND WHERE Ratings.rating = ?";
+             $statement->bindParam(1, $searchField);
+        }
 
     }
 

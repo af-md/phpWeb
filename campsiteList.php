@@ -58,8 +58,24 @@ if (isset($_GET['search-action'])) {
         // I have to add the favourite bit here as well.
     }
     elseif ($searchActionCheck == 'searchFilter') {
-        
-        
+
+            // rating logic 
+        if(isset($_GET['rating-input-5'])){$ratingValue = $_GET['rating-input-5'];} else {$ratingValue = 0; } // rating value 
+       
+                    // facilities logic; 
+        if(isset($_GET['shower'])){$shower = $_GET['shower'];}  else { $shower = 0;  }//
+        if(isset($_GET['wifi'])){ $wifi = $_GET['wifi'];} else { $wifi = 0; }//
+        if(isset($_GET['coffe'])){$coffe = $_GET['coffe'];} else {$coffe = 0;}//    
+        if(isset($_GET['disabe_facilties'])){$acessibility = $_GET['disabe_facilties'];} else {$acessibility = 0;} //  
+        if(isset($_GET['water'])){ $water = $_GET['water'];} else { $water = 0; } //
+        if(isset($_GET['family'])){$family = $_GET['family'];} else {$family = 0; } //
+           
+            // country logic
+        if(isset($_GET['selectedCountry'])){$country = $_GET['shower'];}  else { $country = false;  }//
+       
+        $campsiteData->searchFilter($country, $ratingValue, $shower, $wifi, $coffe, $family, $water, $acessibility);
+       
+        //if(isset($_GET[''])){} 
     }
 }
 else {
