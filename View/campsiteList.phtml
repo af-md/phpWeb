@@ -65,7 +65,7 @@ endif;
                                           <option value="United Kingdom">United Kingdom</option>
                                    </select>
                             </div><br>
-                            <input type="hidden" name="France" value="" id="France">
+                            
                             <div class="container-rating">
                                    <label for="rating">
                                           <p>Filter from ratings</p>
@@ -143,15 +143,15 @@ endif;
        <!-- Seciton for the searched campsite cards display-->
        <?php if($searchCheck): ?>
        <div class="col-9 media-card-central" style="float:right;">
-              <?php  foreach ($view->searchCampsite as $campsite): ?>
-              <div class="row card-style" style="
+              <?php  foreach ($view->campsite as $campsite): ?>
+              <div class="row card-style" style="w
                                     height: 320px; margin-bottom:30px;">
                      <div class="card" id="campsite-card">
                             <div class="text-center">
                                    <div class="card-body">
                                           <div class="col-4" style="float:left;">
-                                                 <img class="card-img-top" src=Images/<?php echo $campsite->getPhoto()
-                                                 ; ?> alt="Card image cap" id="campsite-image">
+                                                 <img class="card-img-top" src=Images/<?php echo $campsite->getPhoto(); ?>
+                                                   alt="Card image cap" id="campsite-image">
                                           </div>
                                           <div class="col-8" style="float:right;">
                                           <h5 class="card-title">
@@ -188,7 +188,7 @@ endif;
                                                         <input type="hidden" name="favouriteCampsiteID" value=<?php
                                                                echo $campsite->getCampsiteID(); ?>>
                                                         <input type="hidden" name="pagination" value=<?php echo
-                                                               $pageNumber ; ?>>
+                                                               $pageNumber ; ?> >
                                                         <input type="hidden" name="FavAction" value="add">
                                                         <?php endif ?>
                                                         <?php endif ?>

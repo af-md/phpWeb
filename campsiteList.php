@@ -37,7 +37,7 @@ if (isset($_GET['search-action'])) {
 
         $searchKeyword = $_GET['search-keyword'];
 
-        $view->searchCampsite = $campsiteData->fetchSomeCampsitesFromSearch($searchKeyword);
+        $view->campsite = $campsiteData->fetchSomeCampsitesFromSearch($searchKeyword);
 
         // Paginatin for the search option
 
@@ -57,9 +57,11 @@ if (isset($_GET['search-action'])) {
         }
         // I have to add the favourite bit here as well.
     }
-    elseif ($searchActionCheck == 'searchFilter') {
+    elseif ($searchActionCheck === 'searchFilter') {
 
             // rating logic 
+            $searchCheck = true;
+
         if(isset($_GET['rating-input-5'])){$ratingValue = $_GET['rating-input-5'];} else {$ratingValue = 0; } // rating value 
        
                     // facilities logic; 
@@ -71,9 +73,11 @@ if (isset($_GET['search-action'])) {
         if(isset($_GET['family'])){$family = $_GET['family'];} else {$family = 0; } //
            
             // country logic
-        if(isset($_GET['selectedCountry'])){$country = $_GET['shower'];}  else { $country = false;  }//
+        if(isset($_GET['selectedCountry'])){$country = $_GET['selectedCountry'];}  else { $country = false;  }//
        
-        $campsiteData->searchFilter($country, $ratingValue, $shower, $wifi, $coffe, $family, $water, $acessibility);
+        $view->campsite = $campsiteData->searchFilter($country, $ratingValue, $shower, $wifi, $coffe, $family, $water, $acessibility);
+        //var_dump($view->campsite); 
+        //die();
        
         //if(isset($_GET[''])){} 
     }

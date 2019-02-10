@@ -2,7 +2,7 @@
 
 Class Campsite {
     
-    protected $_id, $_campsiteName, $_campsiteStreetAddress, $_postcode, $__city, $_country, $_latitude, $_longitude, $_photo, $_shower, $_wifi, $_cafe, $_family, $_water, $_disabled, $_ownerName, $_ownerContact;
+    protected $_id, $_campsiteName, $_campsiteStreetAddress, $_postcode, $_city, $_country, $_latitude, $_longitude, $_photo, $_shower, $_wifi, $_cafe, $_family, $_water, $_disabled, $_ownerName, $_ownerContact;
     
     public function __construct($dbRow) {
         $this->_id = $dbRow['campsiteID'];

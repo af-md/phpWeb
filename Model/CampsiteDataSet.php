@@ -88,6 +88,8 @@ class CampsiteDataSet
             $dataSet[] = new Campsite($row);
             //echo $dataset;
         }
+
+        
         return $dataSet;
     }
 
@@ -97,106 +99,209 @@ class CampsiteDataSet
     public function searchFilter($country, $ratingValue, $shower, $wifi, $cafe, $family, $water, $accessibility)
     {
         // joing the different tables relevant to it. 
-        $sql ="select Campsite.campsiteID, Campsite.campsiteName, Campsite.StreetAddress, Campsite.postcode, Campsite.city, Campsite.country, Campsite.longitude, Campsite.latitude,  Campsite.ownerName, Campsite.ownerContact, Photo.photo, Facilities.shower, Facilities.wifi, Facilities.cafe, Facilities.family_friendly, Facilities.drinking_water, Facilities.disabled_facilities, Ratings.rating FROM Campsite inner join Ratings on Ratings.campsite_id = Campsite.campsiteID inner join Photo on Photo.campsiteID = Campsite.campsiteID inner join Facilities on Facilities.campsiteID = Campsite.campsiteID"; 
-
-        // isnsert a check system in here to assign something 
-         
+        $query ="select Campsite.campsiteID, Campsite.campsiteName, Campsite.StreetAddress, Campsite.postcode, Campsite.city, Campsite.country, Campsite.longitude, Campsite.latitude,  Campsite.ownerName, Campsite.ownerContact, Photo.photo, Facilities.shower, Facilities.wifi, Facilities.cafe, Facilities.family_friendly, Facilities.drinking_water, Facilities.disabled_facilities, Ratings.rating FROM Campsite inner join Ratings on Ratings.campsite_id = Campsite.campsiteID inner join Photo on Photo.campsiteID = Campsite.campsiteID inner join Facilities on Facilities.campsiteID = Campsite.campsiteID";
+        
        
-        // country logic
+        // Nested logic for filtering down the search. Check country value, Check any facility value and finally check any rating value. 
         if($country)
         {
-            $sql = " WHERE Campsite.country = ?";
-            $statement->bindParam(1, $country);
-        }
-
-         // facilities logic; 
-         if ($country) {
-                    if($shower > 0)
-                {
-                    $sql = " AND WHERE Facilities.shower = ?";
-                    $statement->bindParam(2, $country);
-                }
-                if($wifi > 0)
-                {
-                    $sql = " AND WHERE Facilities.wifi = ?";
-                }
-                if($cafe> 0)
-                {
-                    $sql = " AND WHERE Facilities.cafe = ?";
-                }
-                if($family > 0)
-                {
-                    $sql = " AND WHERE Facilities.family_friendly = ?";
-                }
-                if($water> 0)
-                {
-                    $sql = " AND WHERE Facilities.water = ?";
-                }
-                if($accessibility> 0)
-                {
-            $sql = " AND WHERE Facilities.disable_facilities = ?";
-        }
-        else {
+            $query .= " WHERE Campsite.country = :country";
+            
             if($shower > 0)
                 {
-                    $sql = " WHERE Facilities.shower = ?";
-                    $statement->bindParam(2, $country);
+                    $query .= " AND Facilities.shower = :faciltity";
+                    
                 }
                 if($wifi > 0)
                 {
-                    $sql = " AND WHERE Facilities.wifi = ?";
+                    $query .= " AND Facilities.wifi = :faciltity";
                 }
                 if($cafe> 0)
                 {
-                    $sql = " AND WHERE Facilities.cafe = ?";
+                    $query .= " AND Facilities.cafe = :faciltity";
+                    
                 }
                 if($family > 0)
                 {
-                    $sql = " AND WHERE Facilities.family_friendly = ?";
+                    $query .= " AND Facilities.family_friendly = :faciltity";
                 }
                 if($water> 0)
                 {
-                    $sql = " AND WHERE Facilities.water = ?";
+                    $query .= " AND Facilities.water = :faciltity";
                 }
                 if($accessibility> 0)
                 {
-            $sql = " AND WHERE Facilities.disable_facilities = ?";
+                    $query .= " AND Facilities.disable_facilities = :faciltity";
+                }
+                if($ratingValue > 0)
+                { 
+                   $query .= " AND Ratings.rating = :rating";
+               }
+        }
+        elseif ($shower > 0) {
+            {
+                $query .= " WHERE Facilities.shower = :faciltity";
+                //$statement->bindParam(':faciltity', $shower);
+            }
+            if($wifi > 0)
+            {
+                $query .= " AND Facilities.wifi = :faciltity";
+                //$statement->bindParam(':faciltity', $wifi);
+            }
+            if($cafe> 0)
+            {
+                $query .= " AND Facilities.cafe = :faciltity";
+                //$statement->bindParam(':faciltity', $cafe);
+            }
+            if($family > 0)
+            {
+                $query .= " AND Facilities.family_friendly = :faciltity";
+                //$statement->bindParam(':faciltity', $family);
+            }
+            if($water> 0)
+            {
+                $query .= " AND Facilities.water = :faciltity";
+                //$statement->bindParam(':faciltity', $water);
+            }
+            if($accessibility> 0)
+            {
+                $query .= " AND Facilities.disable_facilities = :faciltity";
+                //$statement->bindParam(':faciltity', $accessibility);
+            }
+            if($ratingValue > 0)
+            { 
+               $query .= " AND Ratings.rating = :rating";
+               //$statement->bindParam(':rating', $ratingValue, PDO::PARAM_INT);
+           }
+        }
+        elseif ($wifi > 0) {
+            $query = " WHERE Facilities.wifi = :faciltity";
+            //$statement->bindParam(':faciltity', $wifi);
+            if($cafe> 0)
+            {
+                $query .= " AND Facilities.cafe = :faciltity";
+                //$statement->bindParam(':faciltity', $cafe);
+            }
+            if($family > 0)
+            {
+                $query .= " AND Facilities.family_friendly = :faciltity";
+                //$statement->bindParam(':faciltity', $family);
+            }
+            if($water> 0)
+            {
+                $query .= " AND Facilities.water = :faciltity";
+                //$statement->bindParam(':faciltity', $water);
+            }
+            if($accessibility> 0)
+            {
+                $query .= " AND Facilities.disable_facilities = :faciltity";
+               // $statement->bindParam(':faciltity', $accessibility);
+            }
+            if($ratingValue > 0)
+            { 
+               $query .= " AND Ratings.rating = :rating";
+               //$statement->bindParam(':rating', $ratingValue, PDO::PARAM_INT);
+           }
+        }
+        elseif ($cafe> 0) {
+            $query .= " WHERE Facilities.cafe = :faciltity";
+            //$statement->bindParam(':faciltity', $cafe);
+            if($family > 0)
+            {
+                $query .= " AND Facilities.family_friendly = :faciltity";
+                //$statement->bindParam(':faciltity', $family);
+            }
+            if($water> 0)
+            {
+                $query .= " AND Facilities.water = :faciltity";
+                //$statement->bindParam(':faciltity', $water);
+            }
+            if($accessibility> 0)
+            {
+                $query .= " AND Facilities.disable_facilities = :faciltity";
+                //$statement->bindParam(':faciltity', $accessibility);
+            }
+            if($ratingValue > 0)
+            { 
+               $query .= " AND Ratings.rating = :rating";
+               //$statement->bindParam(':rating', $ratingValue, PDO::PARAM_INT);
+           }
+        }
+        elseif ($family > 0) {
+            $query .= " WHERE Facilities.family_friendly = :faciltity";
+            //$statement->bindParam(':faciltity', $cafe);
+            if($water> 0)
+            {
+                $query .= " AND Facilities.water = :faciltity";
+                //$statement->bindParam(':faciltity', $water);
+            }
+            if($accessibility> 0)
+            {
+                $query .= " AND Facilities.disable_facilities = :faciltity";
+                //$statement->bindParam(':faciltity', $accessibility);
+            }
+            if($ratingValue > 0)
+            { 
+               $query .= " AND Ratings.rating = :rating";
+               //$statement->bindParam(':rating', $ratingValue, PDO::PARAM_INT);
+           }
+        }
+        elseif ($water> 0) {
+            $query .= " WHERE Facilities.water = :faciltity";
+            //$statement->bindParam(':faciltity', $cafe);
+            if($accessibility> 0)
+            {
+                $query .= " AND Facilities.disable_facilities = :faciltity";
+                //$statement->bindParam(':faciltity', $accessibility);
+            }
+            if($ratingValue > 0)
+            { 
+               $query .= " AND Ratings.rating = :rating";
+               //$statement->bindParam(':rating', $ratingValue, PDO::PARAM_INT);
+           }
+        }
+        elseif ($accessibility> 0) {
+            $query .= " WHERE Facilities.disable_facilities = :faciltity";
+            $statement->bindParam(':faciltity', $cafe);
+            if($ratingValue > 0)
+            { 
+               $query .= " AND Ratings.rating = :rating";
+               //$statement->bindParam(':rating', $ratingValue, PDO::PARAM_INT);
+           }
+        }
+        elseif ($ratingValue > 0) {
+            $query .= " WHERE Ratings.rating = :rating";
+            //$statement->bindParam(':faciltity', $ratingValue, PDO::PARAM_INT);
+            
         }
 
-         }
-        if($shower > 0)
+        // prepare the Query to be executed. 
+        $statement = $this->_dbHandle->prepare($query);
+
+        // Bind all the parameters that you might need. 
+        if($country){$statement->bindParam(':country', $country);}
+        if($shower > 0){$statement->bindParam(':faciltity', $shower);}
+        if($wifi > 0){$statement->bindParam(':faciltity', $wifi);}
+        if($cafe > 0){$statement->bindParam(':faciltity', $cafe);}
+        if($family > 0){$statement->bindParam(':faciltity', $family);}
+        if($water > 0){$statement->bindParam(':faciltity', $water);}
+        if($accessibility > 0)$statement->bindParam(':faciltity', $accessibility);{}
+        if($ratingValue > 0){$statement->bindParam(':rating', $ratingValue, PDO::PARAM_INT);}
+        
+        
+        // execute the PDO statement
+        $statement->execute(); 
+
+        //$arrayCampsites = [];
+        while($obj = $statement->fetch())
         {
-            $sql = " AND WHERE Facilities.shower = ?";
-            $statement->bindParam(2, $country);
-        }
-        if($wifi > 0)
-        {
-            $sql = " AND WHERE Facilities.wifi = ?";
-        }
-        if($cafe> 0)
-        {
-            $sql = " AND WHERE Facilities.cafe = ?";
-        }
-        if($family > 0)
-        {
-            $sql = " AND WHERE Facilities.family_friendly = ?";
-        }
-        if($water> 0)
-        {
-            $sql = " AND WHERE Facilities.water = ?";
-        }
-        if($accessibility> 0)
-        {
-            $sql = " AND WHERE Facilities.disable_facilities = ?";
+            $arrayCampsites[] = new Campsite($obj); 
         }
 
-        // create the view and keep coding 
-        // rating logic 
-        if($ratingValue > 0)
-        { 
-             $sql = " AND WHERE Ratings.rating = ?";
-             $statement->bindParam(1, $searchField);
-        }
+        // var_dump($arrayCampsites); 
+        // die();
+
+        return $arrayCampsites; 
 
     }
 
