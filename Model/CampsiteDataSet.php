@@ -92,10 +92,21 @@ class CampsiteDataSet
     }
 
     /**
-     * Filter down the search. 
+     * Return the data requested for filtering down. 
      */
     public function searchFilter()
     {
+        // joing the different tables relevant to it. 
+        $sql ="select Campsite.campsiteID, Campsite.campsiteName, Campsite.StreetAddress, Campsite.postcode, Campsite.city, Campsite.country, Campsite.longitude, Campsite.latitude,  Campsite.ownerName, Campsite.ownerContact, Photo.photo, Facilities.shower, Facilities.wifi, Facilities.cafe, Facilities.family_friendly, Facilities.drinking_water, Facilities.disabled_facilities FROM Campsite inner join Photo on Photo.campsiteID = Campsite.campsiteID inner join Facilities on Facilities.campsiteID = Campsite.campsiteID "; 
+
+        // isnsert a check system in here to assign something 
+        
+        // create the view and keep coding 
+        $sql2 = "ljjlkj"; 
+
+        $sql = $sql2; 
+
+        $sql = ; 
 
     }
 
@@ -131,21 +142,21 @@ class CampsiteDataSet
         $statement->execute(); // execute the PDO statement
     }
 
-    /**
-     * Function to add campsites in the database
-     */
-    public function addCampsite($campsitename, $streetAddress, $postcode, $city, $country)
-    {        
-        // invent some random longitude latitude numbers
-        $query = "INSERT INTO Campsite (userName, userPassword, firstname, lastname ) VALUES (?,?,?,?)";
-        $statement = $this->_dbHandle->prepare($query);
-        $statement->bindParam(1, $campsitename);
-        $statement->bindParam(2, $streetAddress);
-        $statement->bindParam(3, $postcode);
-        $statement->bindParam(4, $city);
-        $statement->bindParam(5, $country);
-        $statement->execute();
-    }
+    // /**
+    //  * Function to add campsites in the database
+    //  */
+    // public function addCampsite($campsitename, $streetAddress, $postcode, $city, $country)
+    // {        
+    //     // invent some random longitude latitude numbers
+    //     $query = "INSERT INTO Campsite (userName, userPassword, firstname, lastname ) VALUES (?,?,?,?)";
+    //     $statement = $this->_dbHandle->prepare($query);
+    //     $statement->bindParam(1, $campsitename);
+    //     $statement->bindParam(2, $streetAddress);
+    //     $statement->bindParam(3, $postcode);
+    //     $statement->bindParam(4, $city);
+    //     $statement->bindParam(5, $country);
+    //     $statement->execute();
+    // }
 
     /**
      * This method retrieves campsite data from the camsite table
@@ -303,16 +314,26 @@ class CampsiteDataSet
      * @return null 
      **/
     
-     public function insertCampsite($campsiteName, $campsiteStreet, $campsitePostcode, $campsiteCity, $campsiteCountry) 
+     public function insertCampsite($campsiteName, $campsiteStreet, $campsitePostcode, $campsiteCity, $campsiteCountry, $latitude, $longitude, $ownerName, $ownerContact, $photo) 
      {
-         $sql = "INSERT INTO Campsite (campsiteName, StreetAddress, postcode, city, country) VALUES (?,?,?,?,?)";  
+         $sql = "INSERT INTO Campsite (campsiteName, StreetAddress, postcode, city, country, longitude, latitude, ownerName, ownerContact) VALUES (?,?,?,?,?,?,?,?,?)";  
          $statement = $this->_dbHandle->prepare($sql);
          $statement->bindParam(1, $campsiteName); // Bind paramers for safety reasons
          $statement->bindParam(2, $campsiteStreet); // Bind paramers for safety reasons
          $statement->bindParam(3, $campsitePostcode); // Bind paramers for safety reasons
          $statement->bindParam(4, $campsiteCity); // Bind paramers for safety reasons
-         $statement->bindParam(5, $campsiteCountry); // Bind paramers for safety reasons            
+         $statement->bindParam(5, $campsiteCountry); // Bind paramers for safety reasons     
+         $statement->bindParam(6, $latitude); // Bind paramers for safety reasons
+         $statement->bindParam(7, $longitude); // Bind paramers for safety reasons  
+         $statement->bindParam(8, $ownerName); // Bind paramers for safety reasons
+         $statement->bindParam(9, $ownerContact); // Bind paramers for safety reasons                              
          $statement->execute();
+         $campsiteID =  $this->_dbHandle->lastInsertId(); 
+         $query = "INSERT INTO Photo (photo, campsiteID) VALUES (?,?)"; 
+         $statement_2 = $this->_dbHandle->prepare($query);
+         $statement_2->bindParam(1, $photo); // Bind paramers for safety reasons
+         $statement_2->bindParam(2, $campsiteID); // Bind paramers for safety reasons          
+         $statement_2->execute();
      }
 
      /**
@@ -341,4 +362,19 @@ class CampsiteDataSet
         $statement->bindParam(2, $campsiteID); // Bind paramers for safety reasons
         $statement->execute();
      }
+
+     /**
+      * Calculate the average of the rating star of the campsite 
+      */
+      public function getRatingAverage($campsiteID)
+      {
+        $query = "SELECT ROUND(AVG(rating)) FROM Ratings Where campsite_id = ? ";
+        $statement = $this->_dbHandle->prepare($query);
+        $statement->bindParam(1, $campsiteID); // Bind paramers for safety reasons
+        $statement->execute();
+        $arrayAverage = $statement->fetch(); 
+        $averageNormal = $arrayAverage[0][0]; 
+        //$averageCast = (int)$average; 
+        return $averageNormal; 
+      }
 }

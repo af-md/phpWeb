@@ -44,52 +44,43 @@ endif;
                                    <label for="form-control">
                                           <p>Filter from country </p>
                                    </label>
-                                   <select multiple class="form-control" id="exampleFormControlSelect2">
-                                          <option>Albia</option name="dd">
-                                          <option>Austria</option>
-                                          <option>Bulgaria</option>
-                                          <option>Croatia</option>
-                                          <option>Cyprus</option>
-                                          <option>Czechia</option>
-                                          <option>Denmark</option>
-                                          <option>Estonia</option>
-                                          <option>Finland</option>
-                                          <option>France</option>
-                                          <option>Germany</option>
-                                          <option>Greece</option>
-                                          <option>Hungary</option>
-                                          <option>Ireland</option>
-                                          <option>Italy</option>
-                                          <option>Latvia</option>
-                                          <option>Lithuania</option>
-                                          <option>Luxembourg</option>
-                                          <option>Malta</option>
-                                          <option>Netherlands</option>
-                                          <option>Poland</option>
-                                          <option>Portugal</option>
-                                          <option>Romania</option>
-                                          <option>Slovakia</option>
-                                          <option>Slovenia</option>
-                                          <option>Spain</option>
-                                          <option>Sweden</option>
-                                          <option>United Kingdom</option>
+                                   <select multiple class="form-control" id="exampleFormControlSelect2" name="selectedCountry">
+                                          <option value="France">France</option>
+                                          <option value="Germany">Germany</option>
+                                          <option value="Greece">Greece</option>
+                                          <option value="Ireland">Ireland</option>
+                                          <option value="Italy">Italy</option>
+                                          <option value="Latvia">Latvia</option>
+                                          <option value="Lithuania">Lithuania</option>
+                                          <option value="Luxembourg">Luxembourg</option>
+                                          <option value="Malta">Malta</option>
+                                          <option value="Netherlands">Netherlands</option>
+                                          <option value="Poland">Poland</option>
+                                          <option value="Portugal">Portugal</option>
+                                          <option value="Romania">Romania</option>
+                                          <option value="Slovakia">Slovakia</option>
+                                          <option value="Slovenia">Slovenia</option>
+                                          <option value="Spain">Spain</option>
+                                          <option value="Sweden">Sweden</option>
+                                          <option value="United Kingdom">United Kingdom</option>
                                    </select>
                             </div><br>
+                            <input type="hidden" name="France" value="" id="France">
                             <div class="container-rating">
                                    <label for="rating">
                                           <p>Filter from ratings</p>
                                    </label>
                                    <div class="row">
                                           <span class="rating">
-                                                 <input type="radio" class="rating-input" id="rating-input-1-5-5" name="rating-input-5">
+                                                 <input type="radio" class="rating-input" id="rating-input-1-5-5" name="rating-input-5" value="5">
                                                  <label for="rating-input-1-5-5" class="rating-star"></label>
-                                                 <input type="radio" class="rating-input" id="rating-input-1-4-5" name="rating-input-5">
+                                                 <input type="radio" class="rating-input" id="rating-input-1-4-5" name="rating-input-5" value="4">
                                                  <label for="rating-input-1-4-5" class="rating-star"></label>
-                                                 <input type="radio" class="rating-input" id="rating-input-1-3-5" name="rating-input-5">
+                                                 <input type="radio" class="rating-input" id="rating-input-1-3-5" name="rating-input-5" value="3">
                                                  <label for="rating-input-1-3-5" class="rating-star"></label>
-                                                 <input type="radio" class="rating-input" id="rating-input-1-2-5" name="rating-input-5">
+                                                 <input type="radio" class="rating-input" id="rating-input-1-2-5" name="rating-input-5" value="2">
                                                  <label for="rating-input-1-2-5" class="rating-star"></label>
-                                                 <input type="radio" class="rating-input" id="rating-input-1-1-5" name="rating-input-5">
+                                                 <input type="radio" class="rating-input" id="rating-input-1-1-5" name="rating-input-5" value="1">
                                                  <label for="rating-input-1-1-5" class="rating-star"></label>
                                           </span>
                                    </div>
@@ -108,33 +99,33 @@ endif;
                                                                <tr>
                                                                       <td><i class="fas fa-shower"></i></td>
                                                                       <td>shower</td>
-                                                                      <td><input type="checkbox" name="shower" id=""></td>
+                                                                      <td><input type="checkbox" name="shower" id="" value="1"></td>
                                                                </tr>
                                                                <tr>
                                                                       <td><i class="fas fa-wifi"></i></td>
                                                                       <td>wifi</td>
-                                                                      <td><input type="checkbox" name="wifi" id=""></td>
+                                                                      <td><input type="checkbox" name="wifi" id="" value="1"></td>
                                                                </tr>
                                                                <tr>
                                                                       <td><i class="fas fa-coffee"></i></td>
                                                                       <td>Coffee</td>
-                                                                      <td><input type="checkbox" name="coffe" id=""></td>
+                                                                      <td><input type="checkbox" name="coffe" id="" value="1"></td>
                                                                </tr>
                                                                <tr>
                                                                       <td><i class="fab fa-accessible-icon"></i></td>
                                                                       <td>Accessible</td>
-                                                                      <td><input type="checkbox" name="disabe_facilties"
+                                                                      <td><input type="checkbox" name="disabe_facilties" value="1"
                                                                                     id=""></td>
                                                                </tr>
                                                                <tr>
                                                                       <td> <i class="fas fa-tint"></i></td>
                                                                       <td>Water</td>
-                                                                      <td><input type="checkbox" name="water" id=""></td>
+                                                                      <td><input type="checkbox" name="water" id="" value="1"></td> 
                                                                </tr>
                                                                <tr>
                                                                       <td><i class="far fa-smile"></i></td>
                                                                       <td>Family</td>
-                                                                      <td><input type="checkbox" name="family" id=""></td>
+                                                                      <td><input type="checkbox" name="family" id="" value="1"></td>
                                                                </tr>
                                                         </table>
                                                  </div>
@@ -154,31 +145,46 @@ endif;
        <div class="col-9 media-card-central" style="float:right;">
               <?php  foreach ($view->searchCampsite as $campsite): ?>
               <div class="row card-style" style="
-    height: 320px; margin-bottom:30px;">
+                                    height: 320px; margin-bottom:30px;">
                      <div class="card" id="campsite-card">
                             <div class="text-center">
                                    <div class="card-body">
-                                          <h5 class="card-title">
-                                                 <?php echo $campsite->getCampsiteName();  ?>
-                                          </h5>
-                                          <div class="col-4">
-                                                 <img class="card-img-top" src=Images/<?php echo $campsite->getPhoto(); ?> alt="Card image cap" id="campsite-image">
+                                          <div class="col-4" style="float:left;">
+                                                 <img class="card-img-top" src=Images/<?php echo $campsite->getPhoto()
+                                                 ; ?> alt="Card image cap" id="campsite-image">
                                           </div>
-                                          <div class="col-8">
-                                                 <p class="card-text" id="address-card">card address here</p><br>
+                                          <div class="col-8" style="float:right;">
+                                          <h5 class="card-title">
+                                                 <?php echo $campsite->getCampsiteName(); 
+                                                  $ID = $campsite->getCampsiteID(); ?>
+                                          </h5>
+                                           <div><?php echo $campsite->getCountry();?> </div>
+                                           <div><?php $rating =  $campsiteData->getRatingAverage($ID); if($rating == 5)
+                {
+                    echo '<i class="fas fa-star" ></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>';
+                }
+                elseif($rating == 4){ echo '<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>';}
+                elseif($rating == 3){ echo '<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>';}
+                elseif($rating == 2){ echo '<i class="fas fa-star"></i><i class="fas fa-star"></i>';}
+                elseif($rating == 1){
+                    echo '<i class="fas fa-star"></i>';
+                }?>
+         </div>
+                                               
                                                  <form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET">
                                                         <?php  $ID = $campsite->getCampsiteID();
                                                               
                                                               if($userData->isUserLogged()):
                                                                if($campsiteData->checkCampIdInFavSes($ID)): ?>
-                                                        <input type="submit" name="DisableFav" value="RemoveFav" class="btn btn-danger">
+                                                        <input type="submit" name="DisableFav" value="RemoveFav" class="btn btn-danger" style="height: 34px;">
                                                         <input type="hidden" name="favouriteCampsiteID" value=<?php
                                                                echo $campsite->getCampsiteID(); ?>>
                                                         <input type="hidden" name="pagination" value=<?php echo
                                                                $pageNumber ; ?>>
                                                         <input type="hidden" name="FavAction" value="remove">
+                                                        <a href="campsitePage.php?campsiteID=<?php echo $campsite->getCampsiteID(); ?>"class="btn btn-secondary" style="height: 34px;">View</a>
                                                         <?php else: ?>
-                                                        <input type="submit" name="AddFav" value="AddFav" class="btn btn-success">
+                                                        <input type="submit" name="AddFav" value="AddFav" class="btn btn-success" style="height: 34px;">
                                                         <input type="hidden" name="favouriteCampsiteID" value=<?php
                                                                echo $campsite->getCampsiteID(); ?>>
                                                         <input type="hidden" name="pagination" value=<?php echo
@@ -193,7 +199,8 @@ endif;
                      </div>
 
               </div>
-       </div>
+      
+             
        <?php endforeach; ?>
 
 
@@ -219,24 +226,36 @@ endif;
                                           </div>
                                           <div class="col-8" style="float:right;">
                                           <h5 class="card-title">
-                                                 <?php echo $campsite->getCampsiteName();  ?>
+                                                 <?php echo $campsite->getCampsiteName(); 
+                                                  $ID = $campsite->getCampsiteID(); ?>
                                           </h5>
-                                          <div><?php echo $campsite->getCity();?> </div>
                                            <div><?php echo $campsite->getCountry();?> </div>
-                                                 <a href="campsitePage.php?campsiteID=<?php echo $campsite->getCampsiteID(); ?>"class="btn btn-secondary">View</a>
+                                           <div><?php $rating =  $campsiteData->getRatingAverage($ID); if($rating == 5)
+                {
+                    echo '<i class="fas fa-star" ></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>';
+                }
+                elseif($rating == 4){ echo '<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>';}
+                elseif($rating == 3){ echo '<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>';}
+                elseif($rating == 2){ echo '<i class="fas fa-star"></i><i class="fas fa-star"></i>';}
+                elseif($rating == 1){
+                    echo '<i class="fas fa-star"></i>';
+                }?>
+         </div>
+                                               
                                                  <form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET">
                                                         <?php  $ID = $campsite->getCampsiteID();
                                                               
                                                               if($userData->isUserLogged()):
                                                                if($campsiteData->checkCampIdInFavSes($ID)): ?>
-                                                        <input type="submit" name="DisableFav" value="RemoveFav" class="btn btn-danger">
+                                                        <input type="submit" name="DisableFav" value="RemoveFav" class="btn btn-danger" style="height: 34px;">
                                                         <input type="hidden" name="favouriteCampsiteID" value=<?php
                                                                echo $campsite->getCampsiteID(); ?>>
                                                         <input type="hidden" name="pagination" value=<?php echo
                                                                $pageNumber ; ?>>
                                                         <input type="hidden" name="FavAction" value="remove">
+                                                        <a href="campsitePage.php?campsiteID=<?php echo $campsite->getCampsiteID(); ?>"class="btn btn-secondary" style="height: 34px;">View</a>
                                                         <?php else: ?>
-                                                        <input type="submit" name="AddFav" value="AddFav" class="btn btn-success">
+                                                        <input type="submit" name="AddFav" value="AddFav" class="btn btn-success" style="height: 34px;">
                                                         <input type="hidden" name="favouriteCampsiteID" value=<?php
                                                                echo $campsite->getCampsiteID(); ?>>
                                                         <input type="hidden" name="pagination" value=<?php echo

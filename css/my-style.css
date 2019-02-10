@@ -33,9 +33,8 @@ body{
 {
   font-size: 30px;
 }
-.fas
-{
-  font-size: 30px;
+.fas {
+  font-size: 15px;
 }
 
 .far 
@@ -123,6 +122,14 @@ float: right;
   background: url('../Images/Samples/star.png') 0 -16px;
 }
 
+.rating-star-list, {
+  position: relative;
+  float: right;
+  display: block;
+  width: 16px;
+  height: 16px;
+  background: url('../Images/Samples/star.png') 0 -16px;
+}
 .rating:hover .rating-star:hover,
 .rating:hover .rating-star:hover ~ .rating-star,
 .rating-input:checked ~ .rating-star  {

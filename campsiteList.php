@@ -59,7 +59,7 @@ if (isset($_GET['search-action'])) {
     }
     elseif ($searchActionCheck == 'searchFilter') {
         
-        //$cafe = ; 
+        
     }
 }
 else {

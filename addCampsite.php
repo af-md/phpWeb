@@ -18,8 +18,11 @@ $campsiteData = new CampsiteDataSet;
     $postcode = $_POST['postcode']; 
     $city = $_POST['city'];
     $country = $_POST['country'];
-  
-   
+    $ownerName = $_POST['ownerName'];
+    $ownerContact = $_POST['ownerContact'];
+    $longitude = '50.698366'; 
+    $latitude = '3.154031';
+
    if(isset($_FILES['myFile']))
    {
          $file = $_FILES['myFile'];      // This was a great learning curve
@@ -59,7 +62,7 @@ $campsiteData = new CampsiteDataSet;
 
                          //header("Location : addCampsite.php?uploadsuccess");
                        
-                         $campsiteData->insertCampsite($campsitename, $streetAddress, $postcode, $city, $country); 
+                         $campsiteData->insertCampsite($campsitename, $streetAddress, $postcode, $city, $country, $latitude, $longitude, $ownerName, $ownerContact, $fileNameNew); 
 
                         // insert the name of the image in to the database 
                         // create an obejct to display the campsite inside the catoulogue 

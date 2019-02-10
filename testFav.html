@@ -27,74 +27,14 @@
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
         crossorigin="anonymous">
-
-    <title>HOME
-        <? php echo $view->pageTitle; ?>
-    </title>
-</head>
-<div class="container">
-    <div class="row">
-        <div class="col-sm-8 col-md-6  col-lg-4">
-            <div><img src="Images/default.jpg"></div>
-        </div>
-        <div class="col-sm-8 col-md-6 col-lg-4">
-                <div>
-                    <table>
-                        <tr>
-                            <th colspan="2">Facility</th>
-                            <th>Avaliability</th>
-                        </tr>
-                        <tr>
-                            <td><i class="fas fa-shower"></i></td>  
-                            <td>shower</td>
-                            <td><?php if($campsite->get_cafe()){echo 'yes';}else{echo 'no';}?></td>
-                        </tr>
-                        <tr>
-                            <td><i class="fas fa-wifi"></i></td>
-                            <td>wifi</td>
-                            <td><?php if($campsite->get_wifi()){echo 'yes';}else{echo 'no';}?></td>
-                        </tr>
-                        <tr>
-                            <td><i class="fas fa-coffee"></i></td>
-                            <td>Coffee</td>
-                            <td><?php if($campsite->get_cafe()){echo 'yes';}else{echo 'no';}?></td>
-                        </tr>
-                        <tr>
-                            <td><i class="fab fa-accessible-icon"></i></td>
-                            <td>Accessible</td>
-                            <td><?php if($campsite->get_disabled()){echo 'yes';}else{echo 'no';}?></td>
-                        </tr>
-                        <tr>
-                            <td>  <i class="fas fa-tint"></i></td>
-                            <td>Water</td>
-                            <td><?php if($campsite->get_water()
-                              ){echo 'yes';}else{echo 'no';}?></td>
-                        </tr>
-                        <tr>
-                            <td><i class="far fa-smile"></i></td>
-                            <td>Family</td>
-                            <td><?php if($campsite->get_family()){echo 'yes';}else{echo 'no';}?></td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-8 col-md-6 col-lg-4">
-            <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi distinctio impedit mollitia aliquid
-                adipisci est eius at laborum consequuntur quam inventore, corrupti nesciunt id consequatur nisi
-                tenetur sunt exercitationem minus. </div>
-        </div>
-
-    <div class="row">
-        <div class="col-sm-8 col-md-6 col-lg-4">
-            <div> <button>leave rating</button></div>
-        </div>
-    </div>
-
-</div>
-</div>
-
-</body>
+    
+    <body>
+            <div><?php if($campsiteData->getRatingAverage($ID) == '5')
+                {  echo '<i class="fas fa-star" ></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>';  
+                elseif($campsiteData->getRatingAverage($ID) == '4'){ echo '<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>';}
+                elseif($campsiteData->getRatingAverage($ID) == '3'){ echo '<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>';}
+                elseif($campsiteData->getRatingAverage($ID) == '2'){ echo '<i class="fas fa-star"></i><i class="fas fa-star"></i>';}
+                elseif($campsiteData->getRatingAverage($ID) == '1'){ echo '<i class="fas fa-star"></i>}';?>
+         </div>
+    </body>
 </html>
