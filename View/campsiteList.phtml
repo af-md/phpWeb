@@ -145,6 +145,7 @@ endif;
        <?php if($searchCheck): ?>
        <div class="col-9 media-card-central" style="float:right;">
               <?php  foreach ($view->campsite as $campsite): ?>
+              <?php   ?>
               <div class="row card-style" style="w
                                     height: 320px; margin-bottom:30px;">
                      <div class="card" id="campsite-card">
@@ -191,7 +192,7 @@ endif;
                                                         <input type="hidden" name="pagination" value=<?php echo
                                                                $pageNumber ; ?> >
                                                         <input type="hidden" name="FavAction" value="add">
-                                                        <a href="campsitePage.php?campsiteID=<?php echo $campsite->getCampsiteID(); ?>"class="btn btn-secondary" style="height: 34px;">View</a>
+                                                        <a href="campsitePage.php?hshid=<?php $_SESSION['campsiteID'] = $campsite->getCampsiteID(); $campsiteID = $_SESSION['campsiteID']; $hash = hash(PASSWORD_DEFAULT, $campsiteID); echo $hash; ?>"class="btn btn-secondary" style="height: 34px;">View</a>
                                                         <?php endif ?>
                                                         <?php endif ?>
                                                  </form>
@@ -263,9 +264,10 @@ endif;
                                                         <input type="hidden" name="pagination" value=<?php echo
                                                                $pageNumber ; ?>>
                                                         <input type="hidden" name="FavAction" value="add">
-                                                        <a href="campsitePage.php?campsiteID=<?php echo $campsite->getCampsiteID(); ?>"class="btn btn-secondary" style="height: 34px;">View</a>
+                                                       
                                                         <?php endif ?>
                                                         <?php endif ?>
+                                                        <a href="campsitePage.php?hshid=<?php $_SESSION['campsiteID'] = $campsite->getCampsiteID(); $campsiteID = $_SESSION['campsiteID']; $hash = password_hash($campsiteID, PASSWORD_DEFAULT);; echo $hash; ?>"class="btn btn-secondary" style="height: 34px;">View</a>
                                                  </form>
                                           </div>
                                    </div>

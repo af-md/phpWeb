@@ -8,15 +8,25 @@ session_start();
 
 $view = new stdClass;
 
-$view->pageTitle= "Single Campsite Page";
+$view->pageTitle= "Campsite Page";
 
 $campsiteData = new CampsiteDataSet;
 
 $userData = new UserDataSet;
 
-if (isset($_GET['campsiteID'])) {
-    $campsiteID = $_GET['campsiteID'];
-    $campsite = $campsiteData->getCampsite($campsiteID);
+if (isset($_GET['hshid'])) {
+    $campsiteID = $_SESSION['campsiteID']; 
+    $hashID = $_GET['hshid'];
+    if( password_verify($campsiteID, $hashID))
+    {
+        $campsite = $campsiteData->getCampsite($campsiteID);    
+    }
+
+    else {
+        header('Location:errorPage.php');
+    }
+   
+    
 }
 
 if (isset($_POST['submit'])) {

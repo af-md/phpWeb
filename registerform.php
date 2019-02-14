@@ -57,7 +57,7 @@ if(isset($_POST['submit_signin']))
 	}
 	else{
 
-		echo "cookies not set";
+		echo "session not set";
 	};
 }
 
