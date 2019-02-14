@@ -85,6 +85,7 @@ endif;
                                           </span>
                                    </div>
                             </div><br>
+                            <input type="hidden" name="pagination" value="1<?php //echo $pageNumber;?>">
                             <div class="container-facility">
                                    <label for="">
                                           <p>Filter from facility</p>
@@ -190,6 +191,7 @@ endif;
                                                         <input type="hidden" name="pagination" value=<?php echo
                                                                $pageNumber ; ?> >
                                                         <input type="hidden" name="FavAction" value="add">
+                                                        <a href="campsitePage.php?campsiteID=<?php echo $campsite->getCampsiteID(); ?>"class="btn btn-secondary" style="height: 34px;">View</a>
                                                         <?php endif ?>
                                                         <?php endif ?>
                                                  </form>
@@ -261,6 +263,7 @@ endif;
                                                         <input type="hidden" name="pagination" value=<?php echo
                                                                $pageNumber ; ?>>
                                                         <input type="hidden" name="FavAction" value="add">
+                                                        <a href="campsitePage.php?campsiteID=<?php echo $campsite->getCampsiteID(); ?>"class="btn btn-secondary" style="height: 34px;">View</a>
                                                         <?php endif ?>
                                                         <?php endif ?>
                                                  </form>

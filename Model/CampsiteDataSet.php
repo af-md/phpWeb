@@ -262,7 +262,7 @@ class CampsiteDataSet
         }
         elseif ($accessibility> 0) {
             $query .= " WHERE Facilities.disable_facilities = :faciltity";
-            $statement->bindParam(':faciltity', $cafe);
+            //$statement->bindParam(':faciltity', $cafe);
             if($ratingValue > 0)
             { 
                $query .= " AND Ratings.rating = :rating";

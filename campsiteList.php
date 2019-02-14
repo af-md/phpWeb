@@ -76,6 +76,19 @@ if (isset($_GET['search-action'])) {
         if(isset($_GET['selectedCountry'])){$country = $_GET['selectedCountry'];}  else { $country = false;  }//
        
         $view->campsite = $campsiteData->searchFilter($country, $ratingValue, $shower, $wifi, $coffe, $family, $water, $acessibility);
+        
+        $countSearchCampsite = count($view->campsite); 
+        
+        if (isset($_GET['pagination'])) {
+            $pageNumber = $_GET['pagination'];
+        }
+
+        if ($countSearchCampsite > 5) {
+            $pagingCheck = true;
+
+            $pageNumber = 1;
+        }
+        
         //var_dump($view->campsite); 
         //die();
        
