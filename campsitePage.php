@@ -16,12 +16,12 @@ $userData = new UserDataSet;
 
 if (isset($_GET['hshid'])) {
     $campsiteID = $_SESSION['campsiteID']; 
+    // $campsiteID = 1; 
     $hashID = $_GET['hshid'];
-    if( password_verify($campsiteID, $hashID))
+    if(password_verify($campsiteID, $hashID))
     {
-        $campsite = $campsiteData->getCampsite($campsiteID);    
+        $campsite = $campsiteData->getCampsite($campsiteID);
     }
-
     else {
         header('Location:errorPage.php');
     }

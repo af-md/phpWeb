@@ -75,7 +75,8 @@ class Captcha
      **/
     public function authUser($input)
     {
-        if ( $input == 'a') { // user input and captcha string are same
+        $word = $_SESSION['captcha_string']; 
+        if ( $input == $word) { // user input and captcha string are same
 
             return true;
         } 
