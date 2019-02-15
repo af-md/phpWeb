@@ -15,12 +15,25 @@ $campsiteData = new CampsiteDataSet;
 $userData = new UserDataSet;
 
 if (isset($_GET['hshid'])) {
-    $campsiteID = $_SESSION['campsiteID']; 
+    //$campsiteID = $_SESSION['campsiteID']; 
     // $campsiteID = 1; 
     $hashID = $_GET['hshid'];
-    if(password_verify($campsiteID, $hashID))
+    $checkWebScrap = false; 
+
+    for ($i=0; $i < 5 ; $i++) { 
+        # code...
+
+       $diffCampsiteID = $_SESSION['campsiteID'][$i];
+
+        if(password_verify($diffCampsiteID, $hashID))
     {
-        $campsite = $campsiteData->getCampsite($campsiteID);
+        $campsite = $campsiteData->getCampsite($diffCampsiteID);
+        $checkWebScrap = true; 
+    }
+    }
+    if($checkWebScrap)
+    {
+       // $campsite = $campsiteData->getCampsite($campsiteID);
     }
     else {
         header('Location:errorPage.php');

@@ -1,5 +1,6 @@
 <?php require_once 'Template/header.phtml'; ?>
 <?php 
+unset($_SESSION['campsiteID']);
 $checkPagination = true; 
 $checkPaginationForFavouriteLanding = false; 
 
@@ -194,7 +195,7 @@ endif;
                                                         <input type="hidden" name="FavAction" value="add">                                                        
                                                         <?php endif ?>
                                                         <?php endif ?>
-                                                        <a href="campsitePage.php?hshid=<?php $_SESSIONS['campsiteID'] = $campsite->getCampsiteID(); $campsiteID = $_SESSIONS['campsiteID']; $hash = password_hash($campsiteID, PASSWORD_DEFAULT); echo $hash; ?>"class="btn btn-secondary" style="height: 34px;">View</a>
+                                                        <a href="campsitePage.php?hshid=<?php $_SESSION['campsiteID'][] = $campsite->getCampsiteID(); $campsiteID =  $campsite->getCampsiteID(); $hash = password_hash($campsiteID, PASSWORD_DEFAULT); $_SESSION['hshid'] = $hash; echo $hash; ?>"class="btn btn-secondary" style="height: 34px;">View</a>                                                        
                                                  </form>
                                           </div>
                                    </div>
@@ -268,8 +269,8 @@ endif;
                                                         <?php endif ?>
                                                         <?php endif ?>
 
-                                                        <a href="campsitePage.php?hshid=<?php $_SESSIONS['campsiteID'] = $campsite->getCampsiteID(); $campsiteID = $_SESSIONS['campsiteID']; $hash = password_hash($campsiteID, PASSWORD_DEFAULT); echo $hash; ?>"class="btn btn-secondary" style="height: 34px;">View</a>
-                                                       
+                                                        <a href="campsitePage.php?hshid=<?php $_SESSION['campsiteID'][] = $campsite->getCampsiteID(); $campsiteID =  $campsite->getCampsiteID(); $hash = password_hash($campsiteID, PASSWORD_DEFAULT); $_SESSION['hshid'] = $hash; echo $hash; ?>"class="btn btn-secondary" style="height: 34px;">View</a>
+                                                        <?php //var_dump($_SESSION['campsiteID'] );  var_dump($_SESSION['hshid'] ); ?>
                                                  </form>
                                           </div>
                                    </div>
@@ -322,5 +323,5 @@ else
        <?php endif; ?>
 </div>
        <?php require_once 'Template/footer.phtml';?>
-       <?php var_dump($_SESSIONS['campsiteID']);  ?>
+       <?php //var_dump($_SESSION['campsiteID'] );  var_dump($_SESSION['hshid'] ); ?>
 </div>

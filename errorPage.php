@@ -1,3 +1,5 @@
+<?php 
+
 require_once 'Model/CampsiteDataSet.php';
 
 require_once 'Model/UserDataSet.php';
@@ -13,3 +15,4 @@ $campsiteData = new CampsiteDataSet;
 $userData = new UserDataSet;
 
 require_once 'View/errorPage.phtml';
+
