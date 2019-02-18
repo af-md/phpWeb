@@ -70,7 +70,7 @@ class CampsiteDataSet
 
     public function fetchSomeCampsitesFromSearch($searchField)
     {
-        $query = "select Campsite.campsiteID, Campsite.campsiteName, Campsite.StreetAddress, Campsite.postcode, Campsite.city, Campsite.country, Campsite.longitude, Campsite.latitude, Photo.photo, Facilities.shower, Facilities.wifi, Facilities.cafe, Facilities.family_friendly, Facilities.drinking_water, Facilities.disabled_facilities FROM Campsite inner join Photo on Photo.campsiteID = Campsite.campsiteID inner join Facilities on Facilities.campsiteID = Campsite.campsiteID WHERE Campsite.campsiteName = ?" ;
+        $query = "select Campsite.campsiteID, Campsite.campsiteName, Campsite.StreetAddress, Campsite.postcode, Campsite.city, Campsite.country, Campsite.longitude, Campsite.latitude, Campsite.ownerName, Campsite.ownerContact, Photo.photo, Facilities.shower, Facilities.wifi, Facilities.cafe, Facilities.family_friendly, Facilities.drinking_water, Facilities.disabled_facilities FROM Campsite inner join Photo on Photo.campsiteID = Campsite.campsiteID inner join Facilities on Facilities.campsiteID = Campsite.campsiteID WHERE Campsite.campsiteName = ?" ;
 
         $statement = $this->_dbHandle->prepare($query); // prepare a PDO statement
         
@@ -571,5 +571,66 @@ class CampsiteDataSet
         $averageNormal = $arrayAverage[0][0]; 
         //$averageCast = (int)$average; 
         return $averageNormal; 
+      }
+
+      /**
+       * Insert the facilities in to the campsites
+       */
+      public function insertFacilities($campsiteID, $shower, $cafe, $wifi, $family, $water, $disabilty)
+      {
+        $query = 'INSERT INTO Facilities (shower, cafe, wifi, family_friendly, drinking_water, disabled_facilities, campsiteID) VALUES (?, ?, ?, ?, ?, ?, ?)'; 
+        $statement = $this->_dbHandle->prepare($query); 
+        $statement->bindParam(1, $shower); // Bind paramers for safety reasons
+        $statement->bindParam(2, $cafe); // Bind paramers for safety reasons
+        $statement->bindParam(3, $wifi); // Bind paramers for safety reasons
+        $statement->bindParam(4, $family); // Bind paramers for safety reasons
+        $statement->bindParam(5, $water); // Bind paramers for safety reasons
+        $statement->bindParam(6, $disabilty); // Bind paramers for safety reasons
+        $statement->bindParam(7, $campsiteID); // Bind paramers for safety reasons
+        $statement->execute();
+      }
+
+      /**
+       * Generates more campsites for testing purposes
+       * 
+       */
+      public function generateCampsites()
+      {
+          // Wrap all of this around a for loop after you thinks it works. Just make 5 thousands campsites. 
+          $campsiteID = 62;
+            // Generate the photo here
+                // For the photo I could use just 10 or more 
+            // Generate campsite data here
+                // Choose a random Country name
+                    $campsiteCountrys = array('Italy'); 
+                // Choose a random Campsite name which will be the campsite name as well. 
+                    $campsiteNames = array('Milano', 'Torino'); 
+                    $positionCampsiteName = array_rand($campsiteNames); // select the key randomly of the elemetns in the array. 
+                // Fix the postcode name 
+                    $postcode = 'DLE RLT'; 
+                // Campsite contact details
+                    $campsiteOwner = 'Bob'; 
+                    $campsiteOwnerNumber = '1234567'; 
+                // Fix latitude and longitude 
+                    $latitude = '';
+                    $longitude = ''; 
+                // Choose a random rating 
+                    $randomRating = rand(1, 5);
+                // Choose random facilities
+                    $shower = rand(0, 1); 
+                    $cafe  = rand(0, 1); 
+                    $wifi  = rand(0, 1); 
+                    $family  = rand(0, 1); 
+                    $water  = rand(0, 1); 
+                    $disabilty  = rand(0, 1); 
+                // Insert the photo and the data in the campsite also in different tables if possible 
+
+                // Call the different insertion methods from the campsite
+                     
+                    insertCampsite($campsiteName, $campsiteStreet, $campsitePostcode, $campsiteCity, $campsiteCountry, $latitude, $longitude, $ownerName, $ownerContact, $photo); 
+                    insertRating($randomRating, $campsiteID); // campsiteID is 52 and just encreasing from there with +1 
+                    insertFacilities($campsiteID, $shower, $cafe, $wifi, $family, $water, $disabilty); // Insert the facilities in the campsite
+
+                            
       }
 }
