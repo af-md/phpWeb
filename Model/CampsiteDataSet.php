@@ -68,17 +68,19 @@ class CampsiteDataSet
         return $dataSet;
     }
 
-    public function fetchSomeCampsitesFromSearch($searchField)
+    public function fetchSomeCampsitesFromSearch($searchField, $pageNumber, $limit)
     {
-        $query = "select Campsite.campsiteID, Campsite.campsiteName, Campsite.StreetAddress, Campsite.postcode, Campsite.city, Campsite.country, Campsite.longitude, Campsite.latitude, Campsite.ownerName, Campsite.ownerContact, Photo.photo, Facilities.shower, Facilities.wifi, Facilities.cafe, Facilities.family_friendly, Facilities.drinking_water, Facilities.disabled_facilities FROM Campsite inner join Photo on Photo.campsiteID = Campsite.campsiteID inner join Facilities on Facilities.campsiteID = Campsite.campsiteID WHERE Campsite.campsiteName = ?" ;
+        $offset = ($pageNumber - 1)* $limit;
+        $query = "select Campsite.campsiteID, Campsite.campsiteName, Campsite.StreetAddress, Campsite.postcode, Campsite.city, Campsite.country, Campsite.longitude, Campsite.latitude, Campsite.ownerName, Campsite.ownerContact, Photo.photo, Facilities.shower, Facilities.wifi, Facilities.cafe, Facilities.family_friendly, Facilities.drinking_water, Facilities.disabled_facilities FROM Campsite inner join Photo on Photo.campsiteID = Campsite.campsiteID inner join Facilities on Facilities.campsiteID = Campsite.campsiteID WHERE Campsite.campsiteName = ?  OR Campsite.country = ? Limit ?,?" ;
 
         $statement = $this->_dbHandle->prepare($query); // prepare a PDO statement
         
         $statement->bindParam(1, $searchField);
+        $statement->bindParam(2, $searchField);
 
-        // $statement->bindParam(1, $offset, PDO::PARAM_INT);
+        $statement->bindParam(3, $offset, PDO::PARAM_INT);
 
-         //  $statement->bindParam(2, $limit, PDO::PARAM_INT);
+        $statement->bindParam(4, $limit, PDO::PARAM_INT);
       
         $statement->execute(); // execute the PDO statement
         
@@ -96,8 +98,10 @@ class CampsiteDataSet
     /**
      * Return the data requested for filtering down. 
      */
-    public function searchFilter($country, $ratingValue, $shower, $wifi, $cafe, $family, $water, $accessibility)
+    public function searchFilter($country, $ratingValue, $shower, $wifi, $cafe, $family, $water, $accessibility, $limit, $pageNumber)
     {
+        $offset = ($pageNumber - 1)* $limit;
+       
         // joing the different tables relevant to it. 
         $query ="select Campsite.campsiteID, Campsite.campsiteName, Campsite.StreetAddress, Campsite.postcode, Campsite.city, Campsite.country, Campsite.longitude, Campsite.latitude,  Campsite.ownerName, Campsite.ownerContact, Photo.photo, Facilities.shower, Facilities.wifi, Facilities.cafe, Facilities.family_friendly, Facilities.drinking_water, Facilities.disabled_facilities, Ratings.rating FROM Campsite inner join Ratings on Ratings.campsite_id = Campsite.campsiteID inner join Photo on Photo.campsiteID = Campsite.campsiteID inner join Facilities on Facilities.campsiteID = Campsite.campsiteID";
         
@@ -275,32 +279,41 @@ class CampsiteDataSet
             
         }
 
+       //$query .= " Limit :offset,:limit";
+
         // prepare the Query to be executed. 
         $statement = $this->_dbHandle->prepare($query);
+        //$statement->bindParam(':offset', $offset, PDO::PARAM_INT);
 
+      // $statement->bindParam(':limit', $limit, PDO::PARAM_INT);
         // Bind all the parameters that you might need. 
-        if($country){$statement->bindParam(':country', $country);}
+        if($country == 'France'){$statement->bindParam(':country', $country);}
         if($shower > 0){$statement->bindParam(':faciltity', $shower);}
         if($wifi > 0){$statement->bindParam(':faciltity', $wifi);}
         if($cafe > 0){$statement->bindParam(':faciltity', $cafe);}
         if($family > 0){$statement->bindParam(':faciltity', $family);}
         if($water > 0){$statement->bindParam(':faciltity', $water);}
-        if($accessibility > 0)$statement->bindParam(':faciltity', $accessibility);{}
+        if($accessibility > 0){
+            $statement->bindParam(':faciltity', $accessibility);
+        }
         if($ratingValue > 0){$statement->bindParam(':rating', $ratingValue, PDO::PARAM_INT);}
         
         
         // execute the PDO statement
         $statement->execute(); 
 
-        //$arrayCampsites = [];
-        while($obj = $statement->fetch())
+       $arrayCampsites = []; 
+
+        while($row = $statement->fetch())
         {
-            $arrayCampsites[] = new Campsite($obj); 
+            $arrayCampsites = new Campsite($row); 
+            //var_dump($arrayCampsites); 
         }
+      
+        var_dump($arrayCampsites);
 
-        // var_dump($arrayCampsites); 
-        // die();
-
+        die();
+        
         return $arrayCampsites; 
 
     }
@@ -596,40 +609,53 @@ class CampsiteDataSet
        */
       public function generateCampsites()
       {
+        $campsiteID = 324;
           // Wrap all of this around a for loop after you thinks it works. Just make 5 thousands campsites. 
-          $campsiteID = 62;
-            // Generate the photo here
-                // For the photo I could use just 10 or more 
-            // Generate campsite data here
-                // Choose a random Country name
-                    $campsiteCountrys = array('Italy'); 
-                // Choose a random Campsite name which will be the campsite name as well. 
-                    $campsiteNames = array('Milano', 'Torino'); 
-                    $positionCampsiteName = array_rand($campsiteNames); // select the key randomly of the elemetns in the array. 
-                // Fix the postcode name 
-                    $postcode = 'DLE RLT'; 
-                // Campsite contact details
-                    $campsiteOwner = 'Bob'; 
-                    $campsiteOwnerNumber = '1234567'; 
-                // Fix latitude and longitude 
-                    $latitude = '';
-                    $longitude = ''; 
-                // Choose a random rating 
-                    $randomRating = rand(1, 5);
-                // Choose random facilities
-                    $shower = rand(0, 1); 
-                    $cafe  = rand(0, 1); 
-                    $wifi  = rand(0, 1); 
-                    $family  = rand(0, 1); 
-                    $water  = rand(0, 1); 
-                    $disabilty  = rand(0, 1); 
+          for ($i=0; $i <5000; $i++) { 
+               // Generate the photo here
+                    // For the photo I could use just 10 or more 
+                    $photoArray = ['Default.jpg', '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg']; 
+                    $position = array_rand($photoArray);
+                    $photo = $photoArray[$position]; 
+                // Generate campsite data here
+                
+                    // Choose a random Country name
+                        $campsiteCountryArray = ['Italy', 'Germany', 'Greece', 'Ireland', 'Latvia', 'Lithuania', 'Luxembourg', 'Malta', 'Poland']; 
+                        $position = array_rand($campsiteCountryArray); // select the key randomly of the elemetns in the array. 
+                        $campsiteCountry = $campsiteCountryArray[$position];
+                    // Choose a random Campsite City name which will be the campsite name as well. 
+                        $campsiteNames = ['Milano', 'Torino', 'Berlin', 'Frankfourt', 'Athens', 'Dublin', 'Galway', 'Tallin', 'Varsavia', 'Valletta']; 
+                        $positionCampsiteName = array_rand($campsiteNames); // select the key randomly of the elemetns in the array. 
+                        $campsiteName = $campsiteNames[$positionCampsiteName]; 
+                        $campsiteCity = $campsiteName; 
+                    // Fix the postcode name 
+                        $campsitePostcode = 'DLE RLT';
+                        // Fix the campsite street 
+                        $campsiteStreet = 'Oxford street';  
+                    // Campsite contact details
+                        $campsiteOwner = 'Bob'; 
+                        $campsiteOwnerNumber = '1234567'; 
+                    // Fix latitude and longitude 
+                        $latitude = '54.803453';
+                        $longitude = '-3.230179'; 
+                    // Choose a random rating 
+                        $randomRating = rand(1, 5);
+                    // Choose random facilities
+                        $shower = rand(0, 1); 
+                        $cafe  = rand(0, 1); 
+                        $wifi  = rand(0, 1); 
+                        $family  = rand(0, 1); 
+                        $water  = rand(0, 1); 
+                        $disabilty  = rand(0, 1); 
                 // Insert the photo and the data in the campsite also in different tables if possible 
 
-                // Call the different insertion methods from the campsite
-                     
-                    insertCampsite($campsiteName, $campsiteStreet, $campsitePostcode, $campsiteCity, $campsiteCountry, $latitude, $longitude, $ownerName, $ownerContact, $photo); 
-                    insertRating($randomRating, $campsiteID); // campsiteID is 52 and just encreasing from there with +1 
-                    insertFacilities($campsiteID, $shower, $cafe, $wifi, $family, $water, $disabilty); // Insert the facilities in the campsite
+                // Call the different insertion methods from the campsite                     
+                    $this->insertCampsite($campsiteName, $campsiteStreet, $campsitePostcode, $campsiteCity, $campsiteCountry, $latitude, $longitude,  $campsiteOwner, $campsiteOwnerNumber, $photo); 
+                    $this->insertRating($campsiteID, $randomRating); // campsiteID is 52 and just encreasing from there with +1 
+                    $this->insertFacilities($campsiteID, $shower, $cafe, $wifi, $family, $water, $disabilty); // Insert the facilities in the campsite
+                    $campsiteID++; 
+          }
+               
 
                             
       }

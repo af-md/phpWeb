@@ -28,7 +28,7 @@ $checkPagination = true;
                                                         <h5 class="card-title">
                                                                <?php echo $campsite->getCampsiteName();  ?>
                                                         </h5>
-                                                        <img class="card-img-top" src=Images/ <?php echo $campsite->getPhoto()
+                                                        <img class="card-img-top" src=Images/<?php echo $campsite->getPhoto()
                                                         ; ?> alt="Card image cap" id="campsite-image">
                                                         <p class="card-text" id="address-card">card address here</p><br>
                                                         <form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET">
@@ -36,7 +36,7 @@ $checkPagination = true;
                                                                 // var_dump($ID);
                                                                  //die()                                     
                                                                 ?>
-                                                               <input type="submit" name="" value=""
+                                                               <input type="submit" name="" value="Remove"
                                                                       class="btn btn-danger">
                                                                <input type="hidden" name="campsiteID" value=<?php
                                                                       echo $campsite->getCampsiteID(); ?>>
@@ -59,6 +59,8 @@ $checkPagination = true;
        </div>
 
 
+       <nav aria-label="Page navigation example" style="margin:auto;">
+              <ul class="pagination justify-content-center">
 
 <?php
                      
@@ -80,6 +82,7 @@ else
 }
  ?>
 
-</body>
+</ul>
+       </nav>
 
 <?php require_once 'Template/footer.phtml'; ?>

@@ -295,20 +295,55 @@ endif;
                      
 
 // Check if the boolean value is true then do something. 
-if($checkPagination)
-{
-    
-    
-    
-    echo '<li class="page-item"><a class="page-link" href="campsiteList.php?page='. $directPrevius .'">Previous</a></li>'; 
-    echo '<li class="page-item"><a class="page-link" href="campsiteList.php?page='. $directNext .'">Next</a></li>';
-}
+if ($searchCheck) {
+       if($checkPagination)
+              {
+              
+              
+              
+              echo '<li class="page-item"><a class="page-link" href="campsiteList.php?page='. $directPrevius .'&search-action=searchBar&search-keyword='.$searchKeyword.'">Previous</a></li>'; 
+              echo '<li class="page-item"><a class="page-link" href="campsiteList.php?page='. $directNext .'&search-action=searchBar&search-keyword='.$searchKeyword.'">Next</a></li>';
+              }
 
-else 
-{
+              else 
+              {
 
-    echo '<li class="page-item"><a class="page-link" href="campsiteList.php?page='.$directPage.'">Next</a></li>';
+              echo '<li class="page-item"><a class="page-link" href="campsiteList.php?page='.$directPage.'&search-action=searchBar&search-keyword='.$searchKeyword.'">Next</a></li>';
+              }
 }
+elseif (searchCheckFilter) {
+       if($checkPagination)
+              {
+              
+              
+              
+              echo '<li class="page-item"><a class="page-link" href="campsiteList.php?page='. $directPrevius .'&search-action=searchFilter'.$searchFilterLine.'">Previous</a></li>'; 
+              echo '<li class="page-item"><a class="page-link" href="campsiteList.php?page='. $directNext .'&search-action=searchFilter'.$searchFilterLine.'">Next</a></li>';
+              }
+
+              else 
+              {
+
+              echo '<li class="page-item"><a class="page-link" href="campsiteList.php?page='.$directPage.'&search-action=searchFilter'.$searchFilterLine.'">Next</a></li>';
+              }
+}
+else {
+       if($checkPagination)
+       {
+       
+       
+       
+       echo '<li class="page-item"><a class="page-link" href="campsiteList.php?page='. $directPrevius .'">Previous</a></li>'; 
+       echo '<li class="page-item"><a class="page-link" href="campsiteList.php?page='. $directNext .'">Next</a></li>';
+       }
+
+       else 
+       {
+
+       echo '<li class="page-item"><a class="page-link" href="campsiteList.php?page='.$directPage.'">Next</a></li>';
+       }
+}
+             
 
 // for ($i=1; $i < $nOfPages; $i++)
 //  { 

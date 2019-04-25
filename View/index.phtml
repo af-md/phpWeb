@@ -1,4 +1,5 @@
 <?php require_once('Template/header.phtml') ?>
+<?php unset($_SESSION['campsitedID']); ?>
 
 <!--Image slider-->
 
@@ -22,30 +23,29 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
     </a>
-    <div class="carousel-caption">
-        <input type="text" placeholder=" Where do you want to go ?" id="textarea-carosel" >    
-        <button class="" id="search-bar-carousel">Search</button>
-    </div>
 </div>
     
 <!--Print some campsites-->
 <div class="container">
     <div class="row">
-  <?php  foreach ($view->campsites as $campsite) {
-    echo '
+  <?php  foreach ($view->campsites as $campsite): ?>
+    
     <div class="col-sm-4 col-md-4 col-lg-4">
                 <div class="card">
                     <img class="card-img-top" src="Images/Default.jpg" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title">' . $campsite->getCampsiteName() .  '</h5>
+                        <h5 class="card-title"><?php  echo $campsite->getCampsiteName(); ?> </h5>
                         <p class="card-text">This is a wider card with supporting text</p>
-                        <a href="#" class="btn btn-primary">See more</a>
-                        <a href="#"> <i class="material-icons" style="font-size:36px">favorite_border</i></a> 
+                        <a href="campsitePage.php?hshid=<?php $_SESSION['campsiteID'][] = $campsite->getCampsiteID(); $campsiteID =  $campsite->getCampsiteID(); $hash = password_hash($campsiteID, PASSWORD_DEFAULT); $_SESSION['hshid'] = $hash; echo $hash; ?>" class="btn btn-primary">See more</a>
                     </div>
                 </div>
-     </div>'; 
-                        }?>
+                
+    </div> 
+
+    <?php  endforeach ?>
+                 
     </div>
+    
 </div>
 
 </body>

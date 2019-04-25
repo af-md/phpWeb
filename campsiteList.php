@@ -20,6 +20,8 @@ $landingCheck = false; // set to false. Check is the user it's on the landing pa
 
 $searchCheck = false; // checks wether the user is using the search or not. 
 
+$searchCheckFilter = false; // Checks wether the fileter search is being applied or not. 
+
 $pagingCheck = false; // varibel used to control the pagination between the search and landing page. 
 
 $limit= 5; // set the limit of entries to show per page.
@@ -35,53 +37,66 @@ if (isset($_GET['search-action'])) {
     if ($searchActionCheck == 'searchBar') {
         $searchCheck = true;
 
-        $searchKeyword = $_GET['search-keyword'];
+        if (isset($_GET['page'])) {$pageNumber = $_GET['page'];} else {
+            $pageNumber = 1; 
+        }
+        
+        if(isset($_GET['search-keyword']))
+            {$searchKeyword = $_GET['search-keyword'];}
 
-        $view->campsite = $campsiteData->fetchSomeCampsitesFromSearch($searchKeyword);
+        $view->campsite = $campsiteData->fetchSomeCampsitesFromSearch($searchKeyword, $pageNumber, $limit);
 
         // Paginatin for the search option
 
-        $countSearchCampsite = count($campsiteData->fetchSomeCampsitesFromSearch($searchKeyword));
+        $countSearchCampsite = count($campsiteData->fetchSomeCampsitesFromSearch($searchKeyword, $pageNumber, $limit));
 
         // var_dump($countSearchCampsite);
         // die();
     
-        if (isset($_GET['pagination'])) {
-            $pageNumber = $_GET['pagination'];
-        }
+        // if (isset($_GET['pagination'])) {
+        //     $pageNumber = $_GET['pagination'];
+        // }
 
-        if ($countSearchCampsite > 5) {
+        if ($countSearchCampsite >= 5) {
             $pagingCheck = true;
-
-            $pageNumber = 1;
+           // $pageNumber = 1;
         }
         // I have to add the favourite bit here as well.
     }
     elseif ($searchActionCheck === 'searchFilter') {
 
             // rating logic 
-            $searchCheck = true;
+            $searchCheckFilter = true;
 
-        if(isset($_GET['rating-input-5'])){$ratingValue = $_GET['rating-input-5'];} else {$ratingValue = 0; } // rating value 
+            $searchKeyword = $_GET['search-action']; 
+
+            $searchFilterLine = ""; 
+
+        if(isset($_GET['rating-input-5'])){$ratingValue = $_GET['rating-input-5']; $searchFilterLine .= "&rating-input-5="; $searchFilterLine .= $ratingValue; } else {$ratingValue = 0; } // rating value 
        
                     // facilities logic; 
-        if(isset($_GET['shower'])){$shower = $_GET['shower'];}  else { $shower = 0;  }//
-        if(isset($_GET['wifi'])){ $wifi = $_GET['wifi'];} else { $wifi = 0; }//
-        if(isset($_GET['coffe'])){$coffe = $_GET['coffe'];} else {$coffe = 0;}//    
-        if(isset($_GET['disabe_facilties'])){$acessibility = $_GET['disabe_facilties'];} else {$acessibility = 0;} //  
-        if(isset($_GET['water'])){ $water = $_GET['water'];} else { $water = 0; } //
-        if(isset($_GET['family'])){$family = $_GET['family'];} else {$family = 0; } //
+        if(isset($_GET['shower'])){$shower = $_GET['shower']; $searchFilterLine .= "&shower=1";}  else { $shower = 0;  }//
+        if(isset($_GET['wifi'])){ $wifi = $_GET['wifi']; $searchFilterLine .= "&wifi=1";} else { $wifi = 0; }//
+        if(isset($_GET['coffe'])){$coffe = $_GET['coffe']; $searchFilterLine .= "&coffe=1";} else {$coffe = 0;}//    
+        if(isset($_GET['disabe_facilties'])){$acessibility = $_GET['disabe_facilties']; $searchFilterLine .= "&disabe_facilties=1";} else {$acessibility = 0;} //  
+        if(isset($_GET['water'])){ $water = $_GET['water']; $searchFilterLine .= "&water=1";} else { $water = 0; } //
+        if(isset($_GET['family'])){$family = $_GET['family']; $searchFilterLine .= "&family=1";} else {$family = 0; } //
            
             // country logic
         if(isset($_GET['selectedCountry'])){$country = $_GET['selectedCountry'];}  else { $country = false;  }//
        
-        $view->campsite = $campsiteData->searchFilter($country, $ratingValue, $shower, $wifi, $coffe, $family, $water, $acessibility);
-        
-        $countSearchCampsite = count($view->campsite); 
-        
+        $pageNumber = 1; 
+
         if (isset($_GET['pagination'])) {
             $pageNumber = $_GET['pagination'];
         }
+
+        
+        $view->campsite = $campsiteData->searchFilter($country, $ratingValue, $shower, $wifi, $coffe, $family, $water, $acessibility, $limit, $pageNumber);
+        
+        $countSearchCampsite = count($view->campsite); 
+        
+        
 
         if ($countSearchCampsite > 5) {
             $pagingCheck = true;
@@ -100,7 +115,7 @@ else {
 
     $pagingCheck = true; 
 
-    if (isset($_GET['page'])) {$pageNumber = $_GET['page'];;}
+    if (isset($_GET['page'])) {$pageNumber = $_GET['page'];}
       // Get the page number from the URL
 
     $landingCheck = true; // set the variable to true, so we can display the camsite to the user. 

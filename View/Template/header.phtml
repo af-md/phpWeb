@@ -59,10 +59,10 @@
                     <?php 
                 if (!$userData->isUserLogged()) { echo '
                 <li class="nav-item">
-                    <a href="Login.php">Login</a>
+                    <a class="nav-link" href="Login.php">Login</a>
                 </li>   
                 <li class="nav-item">
-                    <a href="registerform.php">Sign up</a>
+                    <a  class="nav-link" href="registerform.php">Sign up</a>
                 </li>
                 
 
@@ -71,20 +71,14 @@
                 else {
                     echo '
                             <li class="nav-item">
-                                <a href="logout.php">Logout</a>
+                                <a class="nav-link" href="logout.php">Logout</a>
                             </li> 
                             <li class="nav-item">
-                            <a href="favourite.php">Favourites</a>
+                            <a class="nav-link" href="favourite.php">Favourites</a>
                         </li>
                         <li class="nav-item">
-                            <a href="addCampsite.php">Add Your Campsite</a>
-                        </li> 
-                        <li>
-                                <a href="campsiteAdmin.php" >Admin Panel</a>
-                            </li>
-                        <li class="nav-item">
-                        <a href="userProfile.php">My Profile</a>
-                    </li>   
+                            <a class="nav-link" href="addCampsite.php">Add Your Campsite</a>
+                        </li>    
                 <div class="dropdown">
         <button class = "btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Admin Feature
