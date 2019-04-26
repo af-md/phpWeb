@@ -16,7 +16,11 @@ $userData = new UserDataSet;
 
 $count = $campsiteData->countDatabaseEntry(); // count the entries of data in the campsite table.
 
+
 $landingCheck = false; // set to false. Check is the user it's on the landing page for the firs time or is he's searching
+
+
+$searchCheckBar = false; // checks wether the user is using the search or not. 
 
 $searchCheck = false; // checks wether the user is using the search or not. 
 
@@ -28,6 +32,9 @@ $limit= 5; // set the limit of entries to show per page.
 
 //$nOfPages = ceil($count/$limit); // Calculate the amount of pages I need to display for the user.
 
+$searchFilterLine = ""; 
+
+$resultNotFound = false; 
 
 
 $favouriteCampsite = " "; 
@@ -35,6 +42,8 @@ $favouriteCampsite = " ";
 if (isset($_GET['search-action'])) {
     $searchActionCheck = $_GET['search-action'];
     if ($searchActionCheck == 'searchBar') {
+        $searchCheckBar = true;
+
         $searchCheck = true;
 
         if (isset($_GET['page'])) {$pageNumber = $_GET['page'];} else {
@@ -45,7 +54,6 @@ if (isset($_GET['search-action'])) {
             {$searchKeyword = $_GET['search-keyword'];}
 
         $view->campsite = $campsiteData->fetchSomeCampsitesFromSearch($searchKeyword, $pageNumber, $limit);
-
         // Paginatin for the search option
 
         $countSearchCampsite = count($campsiteData->fetchSomeCampsitesFromSearch($searchKeyword, $pageNumber, $limit));
@@ -56,24 +64,41 @@ if (isset($_GET['search-action'])) {
         // if (isset($_GET['pagination'])) {
         //     $pageNumber = $_GET['pagination'];
         // }
-
-        if ($countSearchCampsite >= 5) {
-            $pagingCheck = true;
-           // $pageNumber = 1;
+        
+        if ($countSearchCampsite > 0) {
+            # code...
+           // $pagingCheck = true;
+           // if there are exactly 5 campsite in the website, pagination will be shown and this will be an erro to correct. 
+            if ($countSearchCampsite >= 5) {
+                $pagingCheck = true;
+            }
         }
-        // I have to add the favourite bit here as well.
+      
+        else {
+            # code...
+
+            $displayResultsNotFoundMessage = " Result Not Found "; 
+
+            $resultNotFound = True; 
+        }
+        
     }
     elseif ($searchActionCheck === 'searchFilter') {
 
             // rating logic 
+            $searchCheck = true;
+
             $searchCheckFilter = true;
 
             $searchKeyword = $_GET['search-action']; 
 
-            $searchFilterLine = ""; 
+            if (isset($_GET['page'])) {$pageNumber = $_GET['page'];} else {
+                $pageNumber = 1; 
+            }
 
-        if(isset($_GET['rating-input-5'])){$ratingValue = $_GET['rating-input-5']; $searchFilterLine .= "&rating-input-5="; $searchFilterLine .= $ratingValue; } else {$ratingValue = 0; } // rating value 
-       
+          //  $searchFilterLine = ""; 
+ 
+        if(isset($_GET['rating-input-5'])){$ratingValue = $_GET['rating-input-5']; $searchFilterLine .= "&rating-input-5="; $searchFilterLine .= $ratingValue; } else {$ratingValue = 0; } // rating value       
                     // facilities logic; 
         if(isset($_GET['shower'])){$shower = $_GET['shower']; $searchFilterLine .= "&shower=1";}  else { $shower = 0;  }//
         if(isset($_GET['wifi'])){ $wifi = $_GET['wifi']; $searchFilterLine .= "&wifi=1";} else { $wifi = 0; }//
@@ -83,13 +108,12 @@ if (isset($_GET['search-action'])) {
         if(isset($_GET['family'])){$family = $_GET['family']; $searchFilterLine .= "&family=1";} else {$family = 0; } //
            
             // country logic
-        if(isset($_GET['selectedCountry'])){$country = $_GET['selectedCountry'];}  else { $country = false;  }//
+        if(isset($_GET['selectedCountry'])){$country = $_GET['selectedCountry']; $searchFilterLine .= '&selectedCountry='.$country; }  else { $country = false;  }//
        
-        $pageNumber = 1; 
+        $searchFilterValuePagination = $searchFilterLine; 
 
-        if (isset($_GET['pagination'])) {
-            $pageNumber = $_GET['pagination'];
-        }
+      //  $pageNumber = 1; 
+
 
         
         $view->campsite = $campsiteData->searchFilter($country, $ratingValue, $shower, $wifi, $coffe, $family, $water, $acessibility, $limit, $pageNumber);
@@ -98,10 +122,21 @@ if (isset($_GET['search-action'])) {
         
         
 
-        if ($countSearchCampsite > 5) {
-            $pagingCheck = true;
+        if ($countSearchCampsite > 0) {
+            # code...
+           // $pagingCheck = true;
+           // if there are exactly 5 campsite in the website, pagination will be shown and this will be an erro to correct. 
+            if ($countSearchCampsite >= 5) {
+                $pagingCheck = true;
+            }
+        }
+      
+        else {
+            # code...
 
-            $pageNumber = 1;
+            $displayResultsNotFoundMessage = " Result Not Found "; 
+
+            $resultNotFound = True; 
         }
         
         //var_dump($view->campsite); 
@@ -120,7 +155,7 @@ else {
 
     $landingCheck = true; // set the variable to true, so we can display the camsite to the user. 
 
-    if (isset($_GET['pagination'])) {$pageNumber = $_GET['pagination'];}
+   // if (isset($_GET['pagination'])) {$pageNumber = $_GET['pagination'];}
 
     $view->campsites = $campsiteData->fetchSomeCampsites($pageNumber, $limit); // Fetch from the campsite by passing parameters for limit and offset.
 

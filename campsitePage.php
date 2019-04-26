@@ -20,26 +20,51 @@ if (isset($_GET['hshid'])) {
     $hashID = $_GET['hshid'];
     $checkWebScrap = false; 
 
-    for ($i=0; $i < 5 ; $i++) { 
+    $campsiteArraySizeSearched =   $_SESSION['campsiteID']; 
+
+    // The below Conditional statements are used to go around the "OFFSET NOT FOUND" error, which can occurr if the campsiteArraySizeSearched variable has less elements in the below for loop break up number. 
+    if (sizeof($campsiteArraySizeSearched) == 1 ) {
+        # code...
+        $safeNet = 1; 
+    }
+    elseif (sizeof($campsiteArraySizeSearched) == 2) {
+        # code...
+        $safeNet = 2;
+    }
+    elseif (sizeof($campsiteArraySizeSearched) == 3) {
+        # code...
+        $safeNet = 3;
+    }
+    elseif (sizeof($campsiteArraySizeSearched) == 4) {
+        # code...
+        $safeNet = 4;
+    }
+    elseif (sizeof($campsiteArraySizeSearched) == 5) {
+        # code...
+        $safeNet = 5;
+    }
+
+    for ($i=0; $i < $safeNet ; $i++) { 
         # code...
 
-       $diffCampsiteID = $_SESSION['campsiteID'][$i];
+          $diffCampsiteID = $_SESSION['campsiteID'][$i];
 
         if(password_verify($diffCampsiteID, $hashID))
     {
         $campsite = $campsiteData->getCampsite($diffCampsiteID);
         $checkWebScrap = true; 
     }
+    // else {
+    //     $checkWebScrap = false; 
+    // }
     }
     if($checkWebScrap)
     {
-       // $campsite = $campsiteData->getCampsite($campsiteID);
+       //$campsite = $campsiteData->getCampsite($campsiteID);
     }
     else {
         header('Location:errorPage.php');
-    }
-   
-    
+    }  
 }
 
 if (isset($_POST['submit'])) {

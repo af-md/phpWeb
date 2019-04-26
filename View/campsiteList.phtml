@@ -28,6 +28,7 @@ endif;
               <div class="search-button">                       
                                    <input type="text" name="search-keyword" placeholder="Search from Campsite Name">
                                    <input type="hidden" name="search-action" value="searchBar">
+                                   <input type="hidden" name="page" value="1">
                                    <button class="search-button-keyword" type="submit">Search</button><br><br>  
               </div>
        </form>
@@ -86,7 +87,7 @@ endif;
                                           </span>
                                    </div>
                             </div><br>
-                            <input type="hidden" name="pagination" value="1<?php //echo $pageNumber;?>">
+                            <input type="hidden" name="page" value="1<?php //echo $pageNumber;?>">
                             <div class="container-facility">
                                    <label for="">
                                           <p>Filter from facility</p>
@@ -143,7 +144,12 @@ endif;
 
 
        <!-- Seciton for the searched campsite cards display-->
-       <?php if($searchCheck): ?>
+
+       <?php if($resultNotFound == true): ?>
+
+       <p>No results found</p>
+
+       <?php elseif($searchCheck): ?>
        <div class="col-9 media-card-central" style="float:right;">
               <?php  foreach ($view->campsite as $campsite): ?>
              
@@ -182,7 +188,7 @@ endif;
                                                         <input type="submit" name="DisableFav" value="RemoveFav" class="btn btn-danger" style="height: 34px;">
                                                         <input type="hidden" name="favouriteCampsiteID" value=<?php
                                                                echo $campsite->getCampsiteID(); ?>>
-                                                        <input type="hidden" name="pagination" value=<?php echo
+                                                        <input type="hidden" name="page" value=<?php echo
                                                                $pageNumber ; ?>>
                                                         <input type="hidden" name="FavAction" value="remove">
                                                         <a href="campsitePage.php?campsiteID=<?php echo $campsite->getCampsiteID(); ?>"class="btn btn-secondary" style="height: 34px;">View</a>
@@ -190,7 +196,7 @@ endif;
                                                         <input type="submit" name="AddFav" value="AddFav" class="btn btn-success" style="height: 34px;">
                                                         <input type="hidden" name="favouriteCampsiteID" value=<?php
                                                                echo $campsite->getCampsiteID(); ?>>
-                                                        <input type="hidden" name="pagination" value=<?php echo
+                                                        <input type="hidden" name="page" value=<?php echo
                                                                $pageNumber ; ?> >
                                                         <input type="hidden" name="FavAction" value="add">                                                        
                                                         <?php endif ?>
@@ -295,51 +301,36 @@ endif;
                      
 
 // Check if the boolean value is true then do something. 
-if ($searchCheck) {
+if ($searchCheckBar) {
        if($checkPagination)
-              {
-              
-              
-              
+              {             
               echo '<li class="page-item"><a class="page-link" href="campsiteList.php?page='. $directPrevius .'&search-action=searchBar&search-keyword='.$searchKeyword.'">Previous</a></li>'; 
               echo '<li class="page-item"><a class="page-link" href="campsiteList.php?page='. $directNext .'&search-action=searchBar&search-keyword='.$searchKeyword.'">Next</a></li>';
               }
-
               else 
               {
-
               echo '<li class="page-item"><a class="page-link" href="campsiteList.php?page='.$directPage.'&search-action=searchBar&search-keyword='.$searchKeyword.'">Next</a></li>';
               }
 }
-elseif (searchCheckFilter) {
+elseif ($searchCheckFilter) {
        if($checkPagination)
-              {
-              
-              
-              
-              echo '<li class="page-item"><a class="page-link" href="campsiteList.php?page='. $directPrevius .'&search-action=searchFilter'.$searchFilterLine.'">Previous</a></li>'; 
-              echo '<li class="page-item"><a class="page-link" href="campsiteList.php?page='. $directNext .'&search-action=searchFilter'.$searchFilterLine.'">Next</a></li>';
+              {             
+              echo '<li class="page-item"><a class="page-link" href="campsiteList.php?page='. $directPrevius .'&search-action=searchFilter'.$searchFilterValuePagination.'">Previous</a></li>'; 
+              echo '<li class="page-item"><a class="page-link" href="campsiteList.php?page='. $directNext .'&search-action=searchFilter'.$searchFilterValuePagination.'">Next</a></li>';
               }
-
               else 
               {
-
               echo '<li class="page-item"><a class="page-link" href="campsiteList.php?page='.$directPage.'&search-action=searchFilter'.$searchFilterLine.'">Next</a></li>';
               }
 }
 else {
        if($checkPagination)
-       {
-       
-       
-       
+       {      
        echo '<li class="page-item"><a class="page-link" href="campsiteList.php?page='. $directPrevius .'">Previous</a></li>'; 
        echo '<li class="page-item"><a class="page-link" href="campsiteList.php?page='. $directNext .'">Next</a></li>';
        }
-
        else 
        {
-
        echo '<li class="page-item"><a class="page-link" href="campsiteList.php?page='.$directPage.'">Next</a></li>';
        }
 }

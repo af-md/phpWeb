@@ -71,16 +71,15 @@ class CampsiteDataSet
     public function fetchSomeCampsitesFromSearch($searchField, $pageNumber, $limit)
     {
         $offset = ($pageNumber - 1)* $limit;
-        $query = "select Campsite.campsiteID, Campsite.campsiteName, Campsite.StreetAddress, Campsite.postcode, Campsite.city, Campsite.country, Campsite.longitude, Campsite.latitude, Campsite.ownerName, Campsite.ownerContact, Photo.photo, Facilities.shower, Facilities.wifi, Facilities.cafe, Facilities.family_friendly, Facilities.drinking_water, Facilities.disabled_facilities FROM Campsite inner join Photo on Photo.campsiteID = Campsite.campsiteID inner join Facilities on Facilities.campsiteID = Campsite.campsiteID WHERE Campsite.campsiteName = ?  OR Campsite.country = ? Limit ?,?" ;
+        $query = "select Campsite.campsiteID, Campsite.campsiteName, Campsite.StreetAddress, Campsite.postcode, Campsite.city, Campsite.country, Campsite.longitude, Campsite.latitude, Campsite.ownerName, Campsite.ownerContact, Photo.photo, Facilities.shower, Facilities.wifi, Facilities.cafe, Facilities.family_friendly, Facilities.drinking_water, Facilities.disabled_facilities FROM Campsite inner join Photo on Photo.campsiteID = Campsite.campsiteID inner join Facilities on Facilities.campsiteID = Campsite.campsiteID WHERE Campsite.campsiteName = :searchField  OR Campsite.country = :searchField Limit :offset, :limit" ;
 
         $statement = $this->_dbHandle->prepare($query); // prepare a PDO statement
         
-        $statement->bindParam(1, $searchField);
-        $statement->bindParam(2, $searchField);
+        $statement->bindParam(':searchField', $searchField);
 
-        $statement->bindParam(3, $offset, PDO::PARAM_INT);
+        $statement->bindParam(':limit', $limit, PDO::PARAM_INT);
 
-        $statement->bindParam(4, $limit, PDO::PARAM_INT);
+        $statement->bindParam(':offset', $offset, PDO::PARAM_INT);
       
         $statement->execute(); // execute the PDO statement
         
@@ -88,11 +87,27 @@ class CampsiteDataSet
 
         while ($row = $statement->fetch()) {
             $dataSet[] = new Campsite($row);
-            //echo $dataset;
         }
 
+       // var_dump($dataSet);
         
-        return $dataSet;
+        return $dataSet; 
+
+    //     $statement->execute();
+
+       
+    //     $arrayCampsites = []; 
+
+    //     while($row = $statement->fetch())
+    //     {
+    //         $arrayCampsites[] = new Campsite($row); 
+    //         //var_dump($arrayCampsites); 
+    //     }
+      
+    //    //var_dump($arrayCampsites);
+    //    //die();  
+    //    return $arrayCampsites; 
+
     }
 
     /**
@@ -107,7 +122,7 @@ class CampsiteDataSet
         
        
         // Nested logic for filtering down the search. Check country value, Check any facility value and finally check any rating value. 
-        if($country)
+        if($country != false)
         {
             $query .= " WHERE Campsite.country = :country";
             
@@ -279,15 +294,14 @@ class CampsiteDataSet
             
         }
 
-       //$query .= " Limit :offset,:limit";
+       $query .= " Limit :offset,:limit";
 
         // prepare the Query to be executed. 
         $statement = $this->_dbHandle->prepare($query);
-        //$statement->bindParam(':offset', $offset, PDO::PARAM_INT);
-
-      // $statement->bindParam(':limit', $limit, PDO::PARAM_INT);
+        
+      
         // Bind all the parameters that you might need. 
-        if($country == 'France'){$statement->bindParam(':country', $country);}
+        if($country != false){$statement->bindParam(':country', $country);}
         if($shower > 0){$statement->bindParam(':faciltity', $shower);}
         if($wifi > 0){$statement->bindParam(':faciltity', $wifi);}
         if($cafe > 0){$statement->bindParam(':faciltity', $cafe);}
@@ -297,24 +311,24 @@ class CampsiteDataSet
             $statement->bindParam(':faciltity', $accessibility);
         }
         if($ratingValue > 0){$statement->bindParam(':rating', $ratingValue, PDO::PARAM_INT);}
-        
-        
-        // execute the PDO statement
-        $statement->execute(); 
+        $statement->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $statement->bindParam(':offset', $offset, PDO::PARAM_INT);
 
-       $arrayCampsites = []; 
+        // execute the PDO statement
+        $statement->execute();
+
+       
+        $arrayCampsites = []; 
 
         while($row = $statement->fetch())
         {
-            $arrayCampsites = new Campsite($row); 
+            $arrayCampsites[] = new Campsite($row); 
             //var_dump($arrayCampsites); 
         }
       
-        var_dump($arrayCampsites);
-
-        die();
-        
-        return $arrayCampsites; 
+       //var_dump($arrayCampsites);
+       //die();  
+       return $arrayCampsites; 
 
     }
 
